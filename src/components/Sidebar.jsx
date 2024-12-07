@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   BsFillHouseDoorFill,
   BsFillGearFill,
@@ -12,61 +12,39 @@ import {
 } from 'react-icons/bs';
 import './Sidebar.css';
 
-function Sidebar({ isExpanded }) {
+const Sidebar = ({ isExpanded }) => {
+  // Navigation items for dynamic rendering
+  const navigationItems = [
+    { path: '/admin/dashboard', icon: <BsFillHouseDoorFill />, label: 'DASHBOARD', roles: ['USER'] },
+    { path: '/user/home', icon: <BsFillHouseDoorFill />, label: 'HOME', roles: ['USER'] },
+    { path: '/logbook', icon: <BsFillBoxFill />, label: 'LOGBOOK', roles: ['USER'] },
+    { path: '/report', icon: <BsExclamationTriangle />, label: 'REPORT', roles: ['ADMIN'] },
+    { path: '/smp', icon: <BsExclamationOctagon />, label: 'SMP', roles: ['ADMIN'] },
+    { path: '/hazard', icon: <BsFileText />, label: 'HAZARD', roles: ['ADMIN'] },
+    { path: '/erp', icon: <BsDisplay />, label: 'ERP', roles: ['ADMIN', 'USER'] },
+    { path: '/help', icon: <BsQuestionCircle />, label: 'HELP', roles: ['ADMIN', 'USER'] },
+    { path: '/settings', icon: <BsFillGearFill />, label: 'SETTINGS', roles: ['ADMIN', 'USER'] }
+  ];
+
+  // Filter navigation based on roles
+  const userRole = localStorage.getItem('userRole'); // Fetch userRole from localStorage
+  const filteredNavigation = navigationItems.filter((item) => item.roles.includes(userRole));
+
   return (
     <aside className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
+
       <ul className="sidebar-list">
-        <li className="sidebar-list-item">
-          <Link to="/dashboard">
-            <BsFillHouseDoorFill className="sidebar-icon" />
-            {isExpanded && <span className="sidebar-text">DASHBOARD</span>}
-          </Link>
-        </li>
-        <li className="sidebar-list-item">
-          <Link to="/logbook">
-            <BsFillBoxFill className="sidebar-icon" />
-            {isExpanded && <span className="sidebar-text">LOGBOOK</span>}
-          </Link>
-        </li>
-        <li className="sidebar-list-item">
-          <Link to="/report">
-            <BsExclamationTriangle className="sidebar-icon" />
-            {isExpanded && <span className="sidebar-text">REPORT</span>}
-          </Link>
-        </li>
-        <li className="sidebar-list-item">
-          <Link to="/smp">
-            <BsExclamationOctagon className="sidebar-icon" />
-            {isExpanded && <span className="sidebar-text">SMP</span>}
-          </Link>
-        </li>
-        <li className="sidebar-list-item">
-          <Link to="/hazard">
-            <BsFileText className="sidebar-icon" />
-            {isExpanded && <span className="sidebar-text">Hazard </span>}
-          </Link>
-        </li>
-        <li className="sidebar-list-item">
-          <Link to="/settings">
-            <BsDisplay className="sidebar-icon" />
-            {isExpanded && <span className="sidebar-text">ERP</span>}
-          </Link>
-        </li>
-        <li className="sidebar-list-item">
-          <Link to="/settings">
-            <BsQuestionCircle className="sidebar-icon" />
-            {isExpanded && <span className="sidebar-text">HELP</span>}
-          </Link>
-        </li>
-        <li className="sidebar-list-item">
-          <Link to="/settings">
-            <BsFillGearFill className="sidebar-icon" />
-            {isExpanded && <span className="sidebar-text">SETTING</span>}
-          </Link>
-        </li>
+        {filteredNavigation.map((item, index) => (
+          <li className="sidebar-list-item" key={index}>
+            <NavLink to={item.path} className={({ isActive }) => (isActive ? 'active-link' : '')}>
+              {item.icon}
+              {isExpanded && <span className="sidebar-text">{item.label}</span>}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </aside>
   );
-}
+};
 
 export default Sidebar;

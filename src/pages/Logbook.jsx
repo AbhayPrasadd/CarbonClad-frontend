@@ -4,7 +4,7 @@ import SafetyObservations from "./SafetyObservations";
 import RedFlags from "./RedFlags";
 import "./Logbook.css";
 
-const socket = new WebSocket("ws://localhost:8080");
+
 
 function Logbook() {
   const [basicDetails, setBasicDetails] = useState({

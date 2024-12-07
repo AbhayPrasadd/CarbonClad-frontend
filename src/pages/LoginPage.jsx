@@ -1,27 +1,82 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import './LoginPage.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function LoginPage({ onLogin }) {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+const Login = ({ onLogin }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
+  const navigate = useNavigate(); // Initialize navigation
 
-  const handleLogin = () => {
-    onLogin(); // Trigger login callback to update authentication state
-    navigate('/dashboard'); // Redirect to the dashboard after login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/auth/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data.success) {
+        setResponseMessage("Login successful! Redirecting...");
+        onLogin(response.data); // Pass the response to App.js
+
+        // Extract user role from the response
+        const userRole = response.data.data.userRole;
+
+        // Route based on the userRole
+        if (userRole === "ADMIN") {
+          navigate("/admin/dashboard");
+        } 
+        else if (userRole === "USER") {
+          navigate("/user/home");
+        } 
+        else {
+          setResponseMessage("Unknown user role. Please contact support.");
+        }
+      } else {
+        setResponseMessage("Login failed. Please try again.");
+      }
+    } catch (error) {
+      setResponseMessage("An error occurred during login.");
+      console.error("Login error:", error);
+    }
   };
 
   return (
-    <div className="login-page">
-      <h1>Login to Your Account</h1>
-      <div className="login-form">
-        <input type="text" placeholder="Username" className="login-input" />
-        <input type="password" placeholder="Password" className="login-input" />
-        <button className="login-button" onClick={handleLogin}>
-          Login
-        </button>
-      </div>
+    <div style={{ margin: "50px" }}>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>Email: </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Password: </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      {responseMessage && <p>{responseMessage}</p>}
     </div>
   );
-}
+};
 
-export default LoginPage;
+export default Login;

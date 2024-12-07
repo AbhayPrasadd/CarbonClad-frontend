@@ -8,25 +8,35 @@ import Dashboard from './pages/Dashboard';
 import Logbook from './pages/Logbook';
 import Hazard from './pages/Hazard';
 import LandingPage from './pages/LandingPage';
-import LoginPage from './pages/LoginPage';
+import Login from './pages/LoginPage'; // Corrected import for Login
 import Checklist from './pages/Checklist.jsx';
 import Chatbot from './components/Chatbot';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState(null); // Store user role
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarExpanded(!isSidebarExpanded);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (response) => {
     setIsAuthenticated(true); // Set the authentication state to true
+    setUserRole(response.data.userRole); // Set the user role based on login response
+  localStorage.setItem('isAuthenticated', true);
+  localStorage.setItem('userRole', response.data.userRole);
   };
 
   // Protected Route Wrapper
-  const ProtectedRoute = ({ element }) => {
-    return isAuthenticated ? element : <Navigate to="/login" replace />;
+  const ProtectedRoute = ({ element, requiredRole }) => {
+    if (!isAuthenticated) {
+      return <Navigate to="/login" replace />;
+    }
+    if (requiredRole && userRole !== requiredRole) {
+      return <Navigate to="/login" replace />; // Redirect to login if role mismatch
+    }
+    return element;
   };
 
   return (
@@ -34,13 +44,14 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
-        {/* Authenticated Routes */}
+        {/* Role-Based Authenticated Routes */}
         <Route
-          path="/dashboard"
+          path="/admin/dashboard"
           element={
             <ProtectedRoute
+              requiredRole="ADMIN"
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />
@@ -55,9 +66,27 @@ function App() {
           }
         />
         <Route
+          path="/user/home"
+          element={
+            <ProtectedRoute
+              requiredRole="USER"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <Dashboard />
+                  </main>
+                </div>
+              }
+            />
+          }
+        />
+        <Route
           path="/logbook"
           element={
             <ProtectedRoute
+              requiredRole="USER"
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />
@@ -65,7 +94,6 @@ function App() {
                   <main className="main-content">
                     <Logbook />
                   </main>
-                  
                 </div>
               }
             />
@@ -75,23 +103,24 @@ function App() {
           path="/report"
           element={
             <ProtectedRoute
+              requiredRole="ADMIN"
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />
                   <Sidebar isExpanded={isSidebarExpanded} />
                   <main className="main-content">
-                    <ReportGeneration/>
+                    <ReportGeneration />
                   </main>
-                 
                 </div>
               }
             />
           }
         />
-         <Route
+        <Route
           path="/smp"
           element={
             <ProtectedRoute
+              requiredRole="ADMIN"
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />
@@ -99,16 +128,16 @@ function App() {
                   <main className="main-content">
                     <Checklist />
                   </main>
-                 
                 </div>
               }
             />
           }
         />
-         <Route
+        <Route
           path="/hazard"
           element={
             <ProtectedRoute
+              requiredRole="ADMIN"
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />
