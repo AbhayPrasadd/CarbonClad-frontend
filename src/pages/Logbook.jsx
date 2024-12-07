@@ -4,8 +4,6 @@ import SafetyObservations from "./SafetyObservations";
 import RedFlags from "./RedFlags";
 import "./Logbook.css";
 
-
-
 function Logbook() {
   const [basicDetails, setBasicDetails] = useState({
     supervisorName: "",
@@ -35,34 +33,12 @@ function Logbook() {
     }
   };
 
-  useEffect(() => {
-    socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log("Received update:", data);
-
-      if (data.type === "updateLogbook") {
-        setBasicDetails(data.basicDetails);
-        setEntries(data.entries);
-        setRedFlags(data.redFlags || []);
-      }
-    };
-
-    return () => {
-      socket.close();
-    };
-  }, []);
-
   // Submit logbook data
   const handleSubmit = () => {
     const logbookData = { basicDetails, entries, redFlags };
     console.log("Submitting logbook:", logbookData);
 
-    socket.send(
-      JSON.stringify({
-        type: "submitLogbook",
-        data: logbookData,
-      })
-    );
+    // Here, you could add an API call or other logic to submit the data
     alert("Logbook submitted successfully!");
   };
 
@@ -85,7 +61,7 @@ function Logbook() {
 
       {/* Submit Button */}
       <button onClick={handleSubmit} className="submit-btn">
-        Save Logbook 
+        Save Logbook
       </button>
     </div>
   );
