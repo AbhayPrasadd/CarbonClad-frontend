@@ -1,0 +1,59 @@
+.dashboard {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .section {
+    margin-bottom: 30px;
+  }
+  
+  .alerts-list,
+  .incident-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .alerts-list li {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  
+  .alert-high {
+    background-color: #ffcccc;
+    color: #900;
+  }
+  
+  .alert-medium {
+    background-color: #fff4cc;
+    color: #a60;
+  }
+  
+  .alert-low {
+    background-color: #ccffcc;
+    color: #090;
+  }
+  
+  .shift-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .shift-table th,
+  .shift-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .shift-table th {
+    background-color: #333;
+    color: #fff;
+  }
+  

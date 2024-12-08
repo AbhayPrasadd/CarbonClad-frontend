@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import ReportGeneration from './components/ReportGeneration.jsx';
 import Dashboard from './pages/Dashboard';
+import SoDashboard from './pages/SoDashboard';
 import Logbook from './pages/Logbook';
 import Hazard from './pages/Hazard';
 import LandingPage from './pages/LandingPage';
@@ -75,7 +76,7 @@ function App() {
                   <Header toggleSidebar={toggleSidebar} />
                   <Sidebar isExpanded={isSidebarExpanded} />
                   <main className="main-content">
-                    <Dashboard />
+                    <SoDashboard />
                   </main>
                 </div>
               }
@@ -86,7 +87,7 @@ function App() {
           path="/logbook"
           element={
             <ProtectedRoute
-              requiredRole="USER"
+              requiredRole="ADMIN" //supervisor
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />
@@ -103,7 +104,7 @@ function App() {
           path="/report"
           element={
             <ProtectedRoute
-              requiredRole="ADMIN"
+              requiredRole="USER"
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />
@@ -120,7 +121,7 @@ function App() {
           path="/smp"
           element={
             <ProtectedRoute
-              requiredRole="ADMIN"
+              requiredRole="ADMIN" //supervisor
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />
@@ -137,7 +138,7 @@ function App() {
           path="/hazard"
           element={
             <ProtectedRoute
-              requiredRole="ADMIN"
+              requiredRole="ADMIN" //supervisor
               element={
                 <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
                   <Header toggleSidebar={toggleSidebar} />

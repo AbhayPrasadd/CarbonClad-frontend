@@ -15,10 +15,11 @@ import './Sidebar.css';
 const Sidebar = ({ isExpanded }) => {
   // Navigation items for dynamic rendering
   const navigationItems = [
-    { path: '/admin/dashboard', icon: <BsFillHouseDoorFill />, label: 'DASHBOARD', roles: ['USER'] },
-    { path: '/user/home', icon: <BsFillHouseDoorFill />, label: 'HOME', roles: ['USER'] },
-    { path: '/logbook', icon: <BsFillBoxFill />, label: 'LOGBOOK', roles: ['USER'] },
-    { path: '/report', icon: <BsExclamationTriangle />, label: 'REPORT', roles: ['ADMIN'] },
+    { path: '/admin/dashboard', icon: <BsFillHouseDoorFill />, label: 'DASHBOARD', roles: ['USER'] }, //safety-officer
+    { path: '/user/home', icon: <BsFillHouseDoorFill />, label: 'HOME', roles: ['ADMIN'] }, //supervisor
+
+    { path: '/logbook', icon: <BsFillBoxFill />, label: 'LOGBOOK', roles: ['ADMIN'] }, 
+    { path: '/report', icon: <BsExclamationTriangle />, label: 'REPORT', roles: ['USER'] }, 
     { path: '/smp', icon: <BsExclamationOctagon />, label: 'SMP', roles: ['ADMIN'] },
     { path: '/hazard', icon: <BsFileText />, label: 'HAZARD', roles: ['ADMIN'] },
     { path: '/erp', icon: <BsDisplay />, label: 'ERP', roles: ['ADMIN', 'USER'] },
