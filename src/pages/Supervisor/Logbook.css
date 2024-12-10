@@ -1,26 +1,73 @@
-/* General container styling */
-
-
-/* Headings */
-h1, h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+/* General container for the Logbook */
+.logbook-container {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Row layout for form inputs */
+/* Header */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+/* Section Headers */
+h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #444;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+/* Input fields and select dropdowns */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Input fields focus styling */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Row layout for form fields */
 .row {
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   margin-bottom: 20px;
 }
 
 .row .form-group {
   flex: 1;
-  margin: 0 10px;
 }
 
-/* Form input labels */
+.form-group {
+  margin-bottom: 15px;
+}
+
 label {
   display: block;
   margin-bottom: 5px;
@@ -28,125 +75,78 @@ label {
   color: #555;
 }
 
-/* Input fields, dropdowns, and buttons */
-input, select, button {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #333;
-}
-
-/* Button styling */
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Add Entry and Submit buttons */
-.add-entry-btn, .submit-btn {
-  display: block;
-  margin: 20px auto;
-  width: fit-content;
-  padding: 10px 20px;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-/* Table for safety observations */
-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Submit Button */
+.submit-container {
+  text-align: center;
   margin-top: 20px;
 }
 
-table th, table td {
-  border: 1px solid #ddd;
+.submit-btn {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.submit-btn:active {
+  background-color: #003f7f;
+  transform: scale(0.98);
+}
+
+/* Table styling for checklist or ventilation devices */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
 }
 
 table th {
-  background-color: #f4f4f4;
+  background-color: #007bff;
+  color: #fff;
   font-weight: bold;
-  color: #333;
 }
 
-table td input {
-  width: calc(100% - 20px);
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+table td {
+  background-color: #f9f9f9;
 }
 
-/* Fetch Geolocation button styling */
-button[type="button"] {
-  width: auto;
-  margin-top: 5px;
-  background-color: #28a745;
+/* Conditional Input Field */
+input[type="text"].conditional-action {
+  display: block;
 }
 
-button[type="button"]:hover {
-  background-color: #218838;
-}
-
-
-/* Responsive design for smaller screens */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .row {
     flex-direction: column;
+    gap: 10px;
   }
 
-  .row .form-group {
-    margin: 0 0 20px 0;
-  }
-
-  button {
+  .submit-btn {
     width: 100%;
   }
-}
-.red-flag-section {
-  margin-top: 20px;
-}
 
-.red-flag-section table {
-  width: 100%;
-  margin-top: 10px;
-  border-collapse: collapse;
-}
+  h1 {
+    font-size: 1.8rem;
+  }
 
-.red-flag-section table th,
-.red-flag-section table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+  h2 {
+    font-size: 1.3rem;
+  }
 }
-
-.red-flag-form input,
-.red-flag-form select {
-  margin: 5px;
-  padding: 8px;
-}
-
-.add-red-flag-btn {
-  padding: 8px 12px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-red-flag-btn:hover {
-  background-color: #c82333;
-}
-

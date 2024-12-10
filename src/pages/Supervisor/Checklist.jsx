@@ -1,68 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import './Alert.css';
+import React, { useState } from "react";
+import './Checklist.css';
 
-const Checklist = () => {
-  const [hazards, setHazards] = useState([]);
-  const [loading, setLoading] = useState(true);
+const SafetyMaterials = () => {
+  const [materials, setMaterials] = useState([
+    { id: 1, name: "Roof bolts, bearing plates", status: "Yes", action: "" },
+    { id: 2, name: "Nuts, Grouting capsule", status: "Yes", action: "" },
+    { id: 3, name: "Timber", status: "Yes", action: "" },
+    { id: 4, name: "Brattice", status: "Yes", action: "" },
+    { id: 5, name: "Sprags", status: "Yes", action: "" },
+    { id: 6, name: "Other safety material (Specify)", status: "Yes", action: "" },
+  ]);
 
-  // Fetch the dummy hazards data
-  useEffect(() => {
-    const fetchHazards = async () => {
-      try {
-        const response = await fetch('/hazardsData.json'); // Fetch from public folder
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setHazards(data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching hazards:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchHazards();
-  }, []);
-
-  // Toggle the status of a hazard
-  const toggleStatus = (id) => {
-    setHazards((prevHazards) =>
-      prevHazards.map((hazard) =>
-        hazard.id === id
-          ? {
-              ...hazard,
-              status: hazard.status === 'Resolved' ? 'Unresolved' : 'Resolved'
-            }
-          : hazard
-      )
+  const handleChange = (id, field, value) => {
+    const updatedMaterials = materials.map((material) =>
+      material.id === id ? { ...material, [field]: value } : material
     );
+    setMaterials(updatedMaterials);
   };
 
-  if (loading) return <p>Loading hazards...</p>;
-
   return (
-    <div className="alert-component">
-      <h2>Hazards</h2>
-      <div className="hazard-list">
-        {hazards.map((hazard) => (
-          <div key={hazard.id} className={`hazard-card ${hazard.status.toLowerCase()}`}>
-            <div className="hazard-info">
-              <h3>{hazard.hazard}</h3>
-              <p>Severity: <strong>{hazard.severity}</strong></p>
-              <p>Status: <strong>{hazard.status}</strong></p>
-            </div>
-            <button
-              className="toggle-button"
-              onClick={() => toggleStatus(hazard.id)}
-            >
-              Mark as {hazard.status === 'Resolved' ? 'Unresolved' : 'Resolved'}
-            </button>
-          </div>
-        ))}
-      </div>
+    <div className="safety-materials">
+      <h2>Safety Materials</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Safety Material</th>
+            <th>Condition (Yes/No)</th>
+            <th>Remedial Action (if No)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {materials.map((material) => (
+            <tr key={material.id}>
+              <td>{material.name}</td>
+              <td>
+                <select
+                  value={material.status}
+                  onChange={(e) => handleChange(material.id, "status", e.target.value)}
+                >
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </td>
+              <td>
+                {material.status === "No" && (
+                  <input
+                    type="text"
+                    placeholder="Enter action taken"
+                    value={material.action}
+                    onChange={(e) => handleChange(material.id, "action", e.target.value)}
+                  />
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default Checklist;
+export default SafetyMaterials;

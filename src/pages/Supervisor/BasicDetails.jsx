@@ -1,65 +1,88 @@
 import React from "react";
-import './BasicDetails.css'
+import './BasicDetails.css';
 
-function BasicDetails({ details, setDetails, fetchGeolocation }) {
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+const BasicDetails = ({ details, setDetails }) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setDetails({ ...details, [name]: value });
   };
 
   return (
     <div className="basic-details">
-      <h2>Basic Details</h2>
-      <div className="row">
-        <div className="form-group">
-          <label>Supervisor Name:</label>
-          <input
-            type="text"
-            name="supervisorName"
-            value={details.supervisorName}
-            onChange={handleChange}
-            placeholder="Enter supervisor name"
-          />
-        </div>
-        <div className="form-group">
-          <label>Inspection Date & Time:</label>
-          <input
-            type="datetime-local"
-            name="inspectionTime"
-            value={details.inspectionTime}
-            onChange={handleChange}
-          />
-        </div>
+      
+      <div className="form-group">
+        <label>Name of Mine:</label>
+        <input
+          type="text"
+          name="mineName"
+          value={details.mineName || ""}
+          onChange={handleChange}
+          placeholder="Enter name of mine"
+        />
+      </div>
+      <div className="form-group">
+        <label>Name of Seam:</label>
+        <input
+          type="text"
+          name="seamName"
+          value={details.seamName || ""}
+          onChange={handleChange}
+          placeholder="Enter name of seam"
+        />
+      </div>
+      <div className="form-group">
+        <label>Name of District (1):</label>
+        <input
+          type="text"
+          name="district1"
+          value={details.district1 || ""}
+          onChange={handleChange}
+          placeholder="Enter name of district (1)"
+        />
+      </div>
+      <div className="form-group">
+        <label>Name of District (2):</label>
+        <input
+          type="text"
+          name="district2"
+          value={details.district2 || ""}
+          onChange={handleChange}
+          placeholder="Enter name of district (2)"
+        />
       </div>
       <div className="row">
         <div className="form-group">
-          <label>Shift:</label>
-          <select
-            name="shift"
-            value={details.shift}
+          <label>Date:</label>
+          <input
+            type="date"
+            name="date"
+            value={details.date || ""}
             onChange={handleChange}
-          >
-            <option>Shift 1</option>
-            <option>Shift 2</option>
-            <option>Shift 3</option>
-          </select>
+          />
         </div>
         <div className="form-group">
-          <label>Geolocation:</label>
+          <label>Shift and Shift Hours:</label>
           <input
             type="text"
-            name="geolocation"
-            value={details.geolocation}
-            readOnly
-            placeholder="Click to fetch geolocation"
+            name="shiftHours"
+            value={details.shiftHours || ""}
+            onChange={handleChange}
+            placeholder="Enter shift and hours"
           />
-          <button type="button" onClick={fetchGeolocation}>
-            Fetch Location
-          </button>
         </div>
+      </div>
+      <div className="form-group">
+        <label>Parts of Mine Inspected:</label>
+        <textarea
+          name="partsInspected"
+          value={details.partsInspected || ""}
+          onChange={handleChange}
+          placeholder="List parts of mine inspected"
+          rows="5"
+        ></textarea>
       </div>
     </div>
   );
-}
+};
 
 export default BasicDetails;

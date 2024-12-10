@@ -1,74 +1,97 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BasicDetails from "./BasicDetails";
-import SafetyObservations from "./SafetyObservations";
-import RedFlags from "./RedFlags";
-import EquipmentStatus from "./EquipmentStatus";
+import Checklist from "./Checklist";
 
-function Logbook() {
-  const [basicDetails, setBasicDetails] = useState({
-    supervisorName: "",
-    inspectionTime: "",
-    shift: "Shift 1",
-    geolocation: "",
+import VentilationDevices from "./VentilationDevices";
+
+
+const Logbook = () => {
+  const [logbookData, setLogbookData] = useState({
+    basicDetails: {
+      supervisorName: "",
+      inspectionTime: "",
+      shift: "Shift 1",
+    },
+    safetyMaterials: [],
+    ventilationDevices: [],
+    safetyObservations: [],
   });
 
-  const [entries, setEntries] = useState([
-    { safetyObservation: "", actionTaken: "" },
-  ]);
-
-  const [equipment, setEquipment] = useState([]);
-  const [redFlags, setRedFlags] = useState([]);
-
-  // Fetch geolocation
-  const fetchGeolocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setBasicDetails((prev) => ({
-          ...prev,
-          geolocation: `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`,
-        }));
-      });
-    } else {
-      alert("Geolocation is not supported by your browser.");
-    }
+  // Handle updates to sections dynamically
+  const updateSection = (section, data) => {
+    setLogbookData((prev) => ({
+      ...prev,
+      [section]: data,
+    }));
   };
+
+  // Components array for dynamic rendering
+  const components = [
+    {
+      name: "Basic Details",
+      component: (
+        <BasicDetails
+          details={logbookData.basicDetails}
+          setDetails={(data) => updateSection("basicDetails", data)}
+        />
+      ),
+    },
+    {
+      name: "Checklist",
+      component: (
+        <Checklist
+          details={logbookData.basicDetails}
+          setDetails={(data) => updateSection("basicDetails", data)}
+        />
+      ),
+    },
+    
+    {
+      name: "Ventilation Devices",
+      component: (
+        <VentilationDevices
+          devices={logbookData.ventilationDevices}
+          setDevices={(data) => updateSection("ventilationDevices", data)}
+        />
+      ),
+    },
+    {
+      name: "Safety Observations",
+      component: (
+        <VentilationDevices
+          devices={logbookData.ventilationDevices}
+          setDevices={(data) => updateSection("ventilationDevices", data)}
+        />
+      ),
+    },
+   
+  ];
 
   // Submit logbook data
   const handleSubmit = () => {
-    const logbookData = { basicDetails, entries, equipment, redFlags };
     console.log("Submitting logbook:", logbookData);
-
-    // Here, you could add an API call or other logic to submit the data
     alert("Logbook submitted successfully!");
   };
 
   return (
-    <div>
-      
+    <div className="logbook-container">
+      <h1>Overman Incharge Logbook</h1>
 
-      {/* Basic Details */}
-      <BasicDetails
-        details={basicDetails}
-        setDetails={setBasicDetails}
-        fetchGeolocation={fetchGeolocation}
-      />
-
-      {/* Safety Observations */}
-      <SafetyObservations entries={entries} setEntries={setEntries} />
-
-      {/* Equipment Status */}
-      <EquipmentStatus equipment={equipment} setEquipment={setEquipment} />
-
-      {/* Red Flags */}
-      <RedFlags redFlags={redFlags} setRedFlags={setRedFlags} />
+      {/* Render all components dynamically */}
+      {components.map((comp, index) => (
+        <div key={index} className="logbook-section">
+          {comp.component}
+        </div>
+      ))}
 
       {/* Submit Button */}
-      <button onClick={handleSubmit} className="submit-btn">
-        Save Logbook
-      </button>
+      <div className="submit-container">
+        <button onClick={handleSubmit} className="submit-btn">
+          Save Logbook
+        </button>
+      </div>
     </div>
   );
-}
+};
 
 export default Logbook;

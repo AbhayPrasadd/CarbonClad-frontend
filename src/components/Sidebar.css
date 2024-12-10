@@ -1,4 +1,3 @@
-/* Sidebar.css */
 
 /* Sidebar Container */
 .sidebar {
@@ -6,17 +5,20 @@
   width: 230px;
   background-color: #34495e;
   color: #ffffff;
-  height: calc(100vh - 60px); /* Subtract header height to fit below header */
+  height: calc(100vh - 60px); 
+  /* Subtract header height to fit below header */
   position: fixed;
-  left: 0; /* Sidebar on the left side */
-  top: 60px; /* Aligns below the header */
+  left: 0; 
+  top: 60px; 
   transition: width 0.3s ease-in-out;
   overflow-y: auto;
   z-index: 1000;
 }
 
+
+/* Collapsed sidebar width */
 .sidebar.collapsed {
-  width: 80px; /* Collapsed sidebar width */
+  width: 80px; 
 }
 
 .sidebar-list {
@@ -66,10 +68,10 @@
 /* Responsive Design Adjustments */
 @media screen and (max-width: 992px) {
   .sidebar {
-    width: 80px;
+    width: 70px;
   }
 
   .sidebar.expanded {
-    width: 250px;
+    width: 200px;
   }
 }

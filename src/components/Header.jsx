@@ -9,7 +9,7 @@ function Header({ toggleSidebar }) {
       <div className="header-left">
         
         <div className="logo">
-          <img src="/logo-preview.png" alt="Logo" />
+          <img src="/coalministry.png" alt="Logo" />
         </div>
         <BsJustify className="hamburger-icon" onClick={toggleSidebar} />
       </div>

@@ -16,11 +16,16 @@ import ReportGeneration from './pages/Safety-Officer/ReportGeneration.jsx';
 import Dashboard from './pages/Supervisor/Dashboard';
 import Logbook from './pages/Supervisor/Logbook';
 import Checklist from './pages/Supervisor/Checklist.jsx';
+import SMPModule from './pages/Supervisor/SMPModule.jsx';
 import Hazard from './pages/Supervisor/Hazard';
 
 //Safety-Officer
 import SoDashboard from './pages/Safety-Officer/SoDashboard.jsx';
+//inspection logbook for safety officer
 import SMPmanagement from './pages/Safety-Officer/SMPmanagment.jsx';
+//control measures page
+//task assignement module 
+//report generation page 
 import NewHazards from './pages/Safety-Officer/NewHazards.jsx';
 
 
@@ -107,6 +112,42 @@ function App() {
             />
           }
         />
+          <Route
+          path="/shiftHandover"
+          element={
+            <ProtectedRoute
+              requiredRole="ADMIN"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <Logbook />
+                  </main>
+                </div>
+              }
+            />
+          }
+        />
+         <Route
+          path="/smpModule"
+          element={
+            <ProtectedRoute
+              requiredRole="ADMIN"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <SMPModule />
+                  </main>
+                </div>
+              }
+            />
+          }
+        />
+        
+        
         <Route
           path="/report"
           element={
