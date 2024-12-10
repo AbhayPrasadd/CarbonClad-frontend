@@ -1,11 +1,5 @@
 /* General container styling */
-.logbook-container {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+
 
 /* Headings */
 h1, h2 {

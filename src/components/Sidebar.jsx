@@ -14,21 +14,33 @@ import './Sidebar.css';
 
 const Sidebar = ({ isExpanded }) => {
   const navigationItems = [
+
+    //supervisor sidebar
     { path: '/admin/dashboard', icon: <BsFillHouseDoorFill />, label: 'DASHBOARD', roles: ['ADMIN'] },
-    { path: '/user/home', icon: <BsFillHouseDoorFill />, label: 'HOME', roles: ['USER'] },
     { path: '/logbook', icon: <BsFillBoxFill />, label: 'LOGBOOK', roles: ['ADMIN'] },
-    { path: '/report', icon: <BsExclamationTriangle />, label: 'REPORT', roles: ['USER'] },
-    { path: '/smp', icon: <BsExclamationOctagon />, label: 'SMP', roles: ['ADMIN'] },
+    { path: '/smp', icon: <BsExclamationOctagon />, label: 'SMP-view', roles: ['ADMIN'] },
     { path: '/hazard', icon: <BsFileText />, label: 'HAZARD', roles: ['ADMIN'] },
-    { path: '/erp', icon: <BsDisplay />, label: 'ERP', roles: ['ADMIN', 'USER'] },
+
+     //safety officer sidebar
+    { path: '/user/home', icon: <BsFillHouseDoorFill />, label: 'Dashboard', roles: ['USER'] },
+    { path: '/SMPmanagement', icon: <BsExclamationOctagon />, label: 'Safety Mangement ', roles: ['USER'] },
+    { path: '/NewHazards', icon: <BsExclamationOctagon />, label: 'Hazards', roles: ['USER'] },
+    { path: '/compliance', icon: <BsExclamationOctagon />, label: 'Compliance', roles: ['USER'] },
+    { path: '/report', icon: <BsExclamationTriangle />, label: 'REPORT', roles: ['USER'] },
+    
+     
+    //common to supervisor and safety-officer
+    { path: '/erp', icon: <BsDisplay />, label: 'ERP', roles: ['ADMIN'] },
     { path: '/help', icon: <BsQuestionCircle />, label: 'HELP', roles: ['ADMIN', 'USER'] },
     { path: '/settings', icon: <BsFillGearFill />, label: 'SETTINGS', roles: ['ADMIN', 'USER'] },
   ];
-
-  const userRole = localStorage.getItem('userRole'); // Fetch user role from localStorage
+  
+   // Fetch user role from localStorage
+  const userRole = localStorage.getItem('userRole'); 
   const filteredNavigation = navigationItems.filter((item) => item.roles.includes(userRole));
 
   return (
+    //sidebar adjustment + sidebar labels 
     <aside className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
       <ul className="sidebar-list">
         {filteredNavigation.map((item, index) => (

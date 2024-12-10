@@ -1,94 +1,122 @@
-import React, { useState, useEffect } from "react";
-import "./SoDashboard.css"; // Optional: Add your custom CSS for styling
+import React, { useState } from "react";
+import "./SoDashboard.css";
 
-const SoDashboard = () => {
-  const [alerts, setAlerts] = useState([]);
-  const [shiftData, setShiftData] = useState([]);
-  const [incidentReports, setIncidentReports] = useState([]);
+const SafetyOfficerDashboard = () => {
+  const [alerts, setAlerts] = useState([
+    "High-risk hazard reported: ID #12345",
+    "Control measure overdue: Hazard #67890",
+  ]);
 
-  // Fetch data from API (mocked here for demonstration)
-  useEffect(() => {
-    fetchSafetyAlerts();
-    fetchShiftData();
-    fetchIncidentReports();
-  }, []);
+  const [recentHazards, setRecentHazards] = useState([
+    {
+      id: "H123",
+      description: "Loose electrical wiring in shaft 3",
+      reportedBy: "Operator - Jane Smith",
+      date: "2024-12-08",
+      riskLevel: 12,
+      status: "Pending",
+    },
+    {
+      id: "H124",
+      description: "Slippery floor near conveyor belt",
+      reportedBy: "Supervisor - John Doe",
+      date: "2024-12-07",
+      riskLevel: 15,
+      status: "In Progress",
+    },
+  ]);
 
-  const fetchSafetyAlerts = async () => {
-    // Replace with your API endpoint
-    const mockAlerts = [
-      { id: 1, message: "Gas levels critical in Zone 3", severity: "High" },
-      { id: 2, message: "Worker missing in Zone 7", severity: "Medium" },
-    ];
-    setAlerts(mockAlerts);
-  };
-
-  const fetchShiftData = async () => {
-    // Replace with your API endpoint
-    const mockShiftData = [
-      { id: 1, workerName: "John Doe", shift: "Day", zone: "Zone 3" },
-      { id: 2, workerName: "Jane Smith", shift: "Night", zone: "Zone 5" },
-    ];
-    setShiftData(mockShiftData);
-  };
-
-  const fetchIncidentReports = async () => {
-    // Replace with your API endpoint
-    const mockReports = [
-      { id: 1, date: "2024-12-01", description: "Minor injury in Zone 1" },
-      { id: 2, date: "2024-12-03", description: "Equipment failure in Zone 4" },
-    ];
-    setIncidentReports(mockReports);
-  };
+  const [trainingStats, setTrainingStats] = useState({
+    trained: 45,
+    total: 60,
+  });
 
   return (
-    <div className="dashboard">
-      <h1>Coal Mine Safety Officer Dashboard</h1>
+    <div className="dashboard-container">
+      {/* Header */}
+      <header className="dashboard-header">
+        <h1>Safety Officer Dashboard</h1>
+        <p>{new Date().toLocaleString()}</p>
+      </header>
 
-      <div className="section">
-        <h2>Real-Time Safety Alerts</h2>
-        <ul className="alerts-list">
-          {alerts.map((alert) => (
-            <li key={alert.id} className={`alert alert-${alert.severity.toLowerCase()}`}>
-              {alert.message} <span>({alert.severity} Severity)</span>
-            </li>
+      {/* Key Metrics */}
+      <section className="metrics">
+        <div className="metric">
+          <h2>Total Hazards</h2>
+          <p>25</p>
+        </div>
+        <div className="metric">
+          <h2>High-Risk Hazards</h2>
+          <p>5</p>
+        </div>
+        <div className="metric">
+          <h2>Control Measures Pending</h2>
+          <p>10</p>
+        </div>
+        <div className="metric">
+          <h2>Training Progress</h2>
+          <p>
+            {trainingStats.trained}/{trainingStats.total} Workers Trained
+          </p>
+        </div>
+      </section>
+
+      {/* Alerts */}
+      <section className="alerts">
+        <h2>Alerts & Notifications</h2>
+        <ul>
+          {alerts.map((alert, index) => (
+            <li key={index}>{alert}</li>
           ))}
         </ul>
-      </div>
+      </section>
 
-      <div className="section">
-        <h2>Shift Management</h2>
-        <table className="shift-table">
+      {/* Recent Hazards */}
+      <section className="recent-hazards">
+        <h2>Recent Hazards</h2>
+        <table>
           <thead>
             <tr>
-              <th>Worker Name</th>
-              <th>Shift</th>
-              <th>Zone</th>
+              <th>ID</th>
+              <th>Description</th>
+              <th>Reported By</th>
+              <th>Date</th>
+              <th>Risk Level</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {shiftData.map((shift) => (
-              <tr key={shift.id}>
-                <td>{shift.workerName}</td>
-                <td>{shift.shift}</td>
-                <td>{shift.zone}</td>
+            {recentHazards.map((hazard) => (
+              <tr key={hazard.id}>
+                <td>{hazard.id}</td>
+                <td>{hazard.description}</td>
+                <td>{hazard.reportedBy}</td>
+                <td>{hazard.date}</td>
+                <td>{hazard.riskLevel}</td>
+                <td>{hazard.status}</td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </section>
 
-      <div className="section">
-        <h2>Incident Reports</h2>
-        <ul className="incident-list">
-          {incidentReports.map((report) => (
-            <li key={report.id}>
-              <strong>Date:</strong> {report.date} - <strong>Details:</strong> {report.description}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* Compliance Progress */}
+      <section className="compliance">
+        <h2>Compliance Monitoring</h2>
+        <p>Inspection progress: 80% completed</p>
+        <p>Audit logs: 10 pending</p>
+      </section>
+
+      {/* Training Management */}
+      <section className="training">
+        <h2>Training Management</h2>
+        <p>
+          {trainingStats.trained} out of {trainingStats.total} workers trained.
+        </p>
+        <p>Next scheduled training: 2024-12-15</p>
+      </section>
     </div>
   );
 };
 
-export default SoDashboard;
+export default SafetyOfficerDashboard;

@@ -1,44 +1,100 @@
-.login-page {
+/* LoginPage.css */
+
+.login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #f3f4f6;
+    font-family: Arial, sans-serif;
   }
   
-  .login-page h1 {
+  .login-container h2 {
     font-size: 2rem;
+    color: #333;
     margin-bottom: 20px;
+    text-align: center;
   }
   
   .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
   }
   
-  .login-input {
+  .login-form div {
+    margin-bottom: 15px;
+  }
+  
+  .login-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .login-form input {
+    width: 100%;
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 300px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .login-button {
+  .login-form input:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  }
+  
+  .login-form button {
     background-color: #4caf50;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
   }
   
-  .login-button:hover {
+  .login-form button:hover {
     background-color: #45a049;
+    transform: translateY(-2px);
+  }
+  
+  .login-form button:active {
+    transform: translateY(0);
+  }
+  
+  .response-message {
+    margin-top: 15px;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .response-message.error {
+    color: #d32f2f; /* Red for error */
+  }
+  
+  .response-message.success {
+    color: #4caf50; /* Green for success */
+  }
+  
+  @media (max-width: 768px) {
+    .login-container {
+      padding: 10px;
+    }
+  
+    .login-form {
+      padding: 20px;
+    }
   }
   

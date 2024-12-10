@@ -1,59 +1,84 @@
-.dashboard {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .section {
-    margin-bottom: 30px;
-  }
-  
-  .alerts-list,
-  .incident-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .alerts-list li {
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  
-  .alert-high {
-    background-color: #ffcccc;
-    color: #900;
-  }
-  
-  .alert-medium {
-    background-color: #fff4cc;
-    color: #a60;
-  }
-  
-  .alert-low {
-    background-color: #ccffcc;
-    color: #090;
-  }
-  
-  .shift-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .shift-table th,
-  .shift-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .shift-table th {
-    background-color: #333;
-    color: #fff;
-  }
-  
+.dashboard-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.metric {
+  background: #ffffff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  width: 22%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.metric h2 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.metric p {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.alerts {
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.alerts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.alerts ul li {
+  margin: 5px 0;
+  padding: 10px;
+  background: #ffcccb;
+  border-radius: 5px;
+}
+
+.recent-hazards table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.recent-hazards th,
+.recent-hazards td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.recent-hazards th {
+  background: #f2f2f2;
+}
+
+.compliance,
+.training {
+  background: #ffffff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}

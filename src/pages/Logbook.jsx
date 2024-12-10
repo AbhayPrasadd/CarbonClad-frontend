@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import BasicDetails from "./BasicDetails";
 import SafetyObservations from "./SafetyObservations";
 import RedFlags from "./RedFlags";
-import "./Logbook.css";
+import EquipmentStatus from "./EquipmentStatus";
 
 function Logbook() {
   const [basicDetails, setBasicDetails] = useState({
@@ -16,6 +16,7 @@ function Logbook() {
     { safetyObservation: "", actionTaken: "" },
   ]);
 
+  const [equipment, setEquipment] = useState([]);
   const [redFlags, setRedFlags] = useState([]);
 
   // Fetch geolocation
@@ -35,7 +36,7 @@ function Logbook() {
 
   // Submit logbook data
   const handleSubmit = () => {
-    const logbookData = { basicDetails, entries, redFlags };
+    const logbookData = { basicDetails, entries, equipment, redFlags };
     console.log("Submitting logbook:", logbookData);
 
     // Here, you could add an API call or other logic to submit the data
@@ -43,8 +44,8 @@ function Logbook() {
   };
 
   return (
-    <div className="logbook-container">
-      <h1>Supervisor Statutory Logbook</h1>
+    <div>
+      
 
       {/* Basic Details */}
       <BasicDetails
@@ -55,6 +56,9 @@ function Logbook() {
 
       {/* Safety Observations */}
       <SafetyObservations entries={entries} setEntries={setEntries} />
+
+      {/* Equipment Status */}
+      <EquipmentStatus equipment={equipment} setEquipment={setEquipment} />
 
       {/* Red Flags */}
       <RedFlags redFlags={redFlags} setRedFlags={setRedFlags} />

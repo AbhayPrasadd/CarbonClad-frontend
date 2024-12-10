@@ -1,0 +1,64 @@
+.risk-assessment-container {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .dropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .risk-level {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .risk-level.low {
+    color: #2ecc71;
+    background-color: #e9f7ef;
+  }
+  
+  .risk-level.medium {
+    color: #f39c12;
+    background-color: #fdf2e9;
+  }
+  
+  .risk-level.high {
+    color: #e74c3c;
+    background-color: #fceaea;
+  }
+  
+  .risk-level.critical {
+    color: #c0392b;
+    background-color: #f9e0e0;
+  }
+  

@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import ReportGeneration from './components/ReportGeneration.jsx';
-import Dashboard from './pages/Dashboard';
-import SoDashboard from './pages/SoDashboard';
-import Logbook from './pages/Logbook';
-import Hazard from './pages/Hazard';
+
+//main components
 import LandingPage from './pages/LandingPage';
 import Login from './pages/LoginPage';
-import Checklist from './pages/Checklist.jsx';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import Chatbot from './components/Chatbot';
+import ReportGeneration from './components/ReportGeneration.jsx';
+
+
+//Supervisor interface
+import Dashboard from './pages/Dashboard';
+import Logbook from './pages/Logbook';
+import Hazard from './pages/Hazard';
+
+//Safety-Officer
+import SoDashboard from './pages/SoDashboard';
+import Checklist from './pages/Checklist.jsx';
+import newHazards from './pages/NewHazards.jsx';
+import SMPmanagement from './pages/SMPmanagment.jsx';
+import NewHazards from './pages/NewHazards.jsx';
+
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,7 +42,9 @@ function App() {
   };
 
   const handleLogin = (response) => {
-    const role = response.data.userRole; // 'ADMIN' or 'USER'
+
+    //supervisor or Saffety-officer
+    const role = response.data.userRole; 
     setIsAuthenticated(true);
     setUserRole(role);
     localStorage.setItem('isAuthenticated', 'true');
@@ -54,7 +68,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
-        {/* Role-Based Authenticated Routes */}
+        {/* Supervisor */}
         <Route
           path="/admin/dashboard"
           element={
@@ -154,6 +168,42 @@ function App() {
                     <Hazard />
                   </main>
                   <Chatbot />
+                </div>
+              }
+            />
+          }
+        />
+        <Route
+          path="/SMPmanagement"
+          element={
+            <ProtectedRoute
+              requiredRole="USER"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <SMPmanagement />
+                  </main>
+                 
+                </div>
+              }
+            />
+          }
+        />
+        <Route
+          path="/NewHazards"
+          element={
+            <ProtectedRoute
+              requiredRole="USER"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <NewHazards/>
+                  </main>
+                 
                 </div>
               }
             />
