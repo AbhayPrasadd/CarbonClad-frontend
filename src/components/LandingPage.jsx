@@ -33,7 +33,7 @@ function LandingPage() {
         {/* Left Section: Image */}
         <div className="landing-image">
         <img
-  src="https://cdn.example.com/images/coal-mine.jpg"
+  src="/loginpage.jpg"
   alt="Coal Mine"
 />
 
@@ -41,7 +41,7 @@ function LandingPage() {
 
         {/* Right Section: Text */}
         <div className="landing-text">
-          <h1>Welcome to the Mining Dashboard</h1>
+          <h1>Welcome to CarbonClad</h1>
           <p>
             CarbonClad provides a seamless and comprehensive solution for managing your mining operations. 
             Optimize productivity, ensure safety, and achieve efficiency with our cutting-edge tools.

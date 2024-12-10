@@ -6,42 +6,27 @@ import './LoginPage.css';
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("User"); // Default role selection
   const [responseMessage, setResponseMessage] = useState("");
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         "http://localhost:5000/auth/login",
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { email, password, role },
+        { headers: { "Content-Type": "application/json" } }
       );
 
       if (response.data.success) {
         setResponseMessage("Login successful! Redirecting...");
-        onLogin(response.data); // Pass the response to App.js
+        onLogin(response.data);
 
-        // Extract user role from the response
         const userRole = response.data.data.userRole;
-
-        // Route based on the userRole
-        if (userRole === "ADMIN") {
-          navigate("/admin/dashboard");
-        } 
-        else if (userRole === "USER") {
-          navigate("/user/home");
-        } 
-        else {
-          setResponseMessage("Unknown user role. Please contact support.");
-        }
+        if (userRole === "ADMIN") navigate("/admin/dashboard");
+        else if (userRole === "USER") navigate("/user/home");
+        else setResponseMessage("Unknown user role. Please contact support.");
       } else {
         setResponseMessage("Login failed. Please try again.");
       }
@@ -51,12 +36,18 @@ const Login = ({ onLogin }) => {
     }
   };
 
+  const handleRegister = () => {
+    navigate("/register");
+  };
+
   return (
-    <div style={{ margin: "50px" }}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleLogin}>
+       
+
+        <h2>Login</h2>
         <div>
-          <label>Email: </label>
+          <label>Email:</label>
           <input
             type="email"
             value={email}
@@ -65,7 +56,7 @@ const Login = ({ onLogin }) => {
           />
         </div>
         <div>
-          <label>Password: </label>
+          <label>Password:</label>
           <input
             type="password"
             value={password}
@@ -73,9 +64,17 @@ const Login = ({ onLogin }) => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+
+        {/* Buttons in the same row */}
+        <div className="button-group">
+          <button type="submit">Login</button>
+          <button type="button" onClick={handleRegister} className="register-btn">
+            Register
+          </button>
+        </div>
+
+        {responseMessage && <p className="response-message">{responseMessage}</p>}
       </form>
-      {responseMessage && <p>{responseMessage}</p>}
     </div>
   );
 };

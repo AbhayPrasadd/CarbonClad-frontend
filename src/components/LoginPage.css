@@ -1,100 +1,134 @@
-/* LoginPage.css */
-
+/* Main container for login page */
 .login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f3f4f6;
-    font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #2b3e50;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Login form styling */
+.login-form {
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+/* Role selection dropdown at top-right */
+.role-selection {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.role-selection label {
+  margin-right: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.role-selection select {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.role-selection select:focus {
+  border-color: #1abc9c;
+  box-shadow: 0 0 5px rgba(26, 188, 156, 0.3);
+}
+
+/* Header */
+.login-form h2 {
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+/* Input field styles */
+.login-form input {
+  width: calc(100% - 20px);
+  max-width: 360px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #1abc9c;
+  box-shadow: 0 0 8px rgba(26, 188, 156, 0.3);
+}
+
+/* Button Group (Login and Register buttons) */
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Space between buttons */
+  align-items: center;
+  gap: 10px; /* Add space between buttons */
+}
+
+.login-form button {
+  background: #1abc9c;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1; /* Ensure buttons are of equal width */
+}
+
+.login-form button:hover {
+  background: #16a085;
+  transform: translateY(-2px);
+}
+
+.register-btn {
+  background: #3498db; /* Blue for the Register button */
+}
+
+.register-btn:hover {
+  background: #2980b9; /* Darker blue on hover */
+}
+
+/* Response messages */
+.response-message {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 15px;
   }
-  
-  .login-container h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
+
   .login-form {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+    padding: 20px;
   }
-  
-  .login-form div {
-    margin-bottom: 15px;
+
+  .role-selection {
+    top: 5px;
+    right: 5px;
   }
-  
-  .login-form label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #555;
-  }
-  
-  .login-form input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .login-form input:focus {
-    border-color: #4caf50;
-    outline: none;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-  }
-  
-  .login-form button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 12px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
-  }
-  
-  .login-form button:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
-  }
-  
-  .login-form button:active {
-    transform: translateY(0);
-  }
-  
-  .response-message {
-    margin-top: 15px;
-    font-size: 1rem;
-    text-align: center;
-  }
-  
-  .response-message.error {
-    color: #d32f2f; /* Red for error */
-  }
-  
-  .response-message.success {
-    color: #4caf50; /* Green for success */
-  }
-  
-  @media (max-width: 768px) {
-    .login-container {
-      padding: 10px;
-    }
-  
-    .login-form {
-      padding: 20px;
-    }
-  }
-  
+}

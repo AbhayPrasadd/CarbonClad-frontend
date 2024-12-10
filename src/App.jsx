@@ -6,6 +6,7 @@ import './App.css';
 import LandingPage from './components/LandingPage.jsx';
 import Login from './components/LoginPage.jsx';
 import Header from './components/Header';
+import Registration from "./components/Registration.jsx";
 import Sidebar from './components/Sidebar';
 import Chatbot from './components/Chatbot';
 import ReportGeneration from './pages/Safety-Officer/ReportGeneration.jsx';
@@ -67,6 +68,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Registration />} />
 
         {/* Supervisor ROUTES*/}
         <Route
