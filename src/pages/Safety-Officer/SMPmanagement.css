@@ -1,0 +1,35 @@
+.smp-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tab-container button.active {
+  background-color: #28a745;
+}
+
+.tab-container button:hover {
+  background-color: #0056b3;
+}
+
+.component-container {
+  padding-top: 10px;
+}

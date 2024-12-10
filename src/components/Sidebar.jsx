@@ -24,7 +24,8 @@ const Sidebar = ({ isExpanded }) => {
      //safety officer sidebar
     { path: '/user/home', icon: <BsFillHouseDoorFill />, label: 'Dashboard', roles: ['USER'] },
     { path: '/SMPmanagement', icon: <BsExclamationOctagon />, label: 'Safety Mangement ', roles: ['USER'] },
-    { path: '/NewHazards', icon: <BsExclamationOctagon />, label: 'Hazards', roles: ['USER'] },
+    { path: '/controlMeasures', icon: <BsExclamationOctagon />, label: 'Control Measures ', roles: ['USER'] },
+    { path: '/newHazards', icon: <BsExclamationOctagon />, label: 'Hazards', roles: ['USER'] },
     { path: '/compliance', icon: <BsExclamationOctagon />, label: 'Compliance', roles: ['USER'] },
     { path: '/report', icon: <BsExclamationTriangle />, label: 'REPORT', roles: ['USER'] },
     

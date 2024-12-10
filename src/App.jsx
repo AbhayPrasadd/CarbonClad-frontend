@@ -3,25 +3,24 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import './App.css';
 
 //main components
-import LandingPage from './pages/LandingPage';
-import Login from './pages/LoginPage';
+import LandingPage from './components/LandingPage.jsx';
+import Login from './components/LoginPage.jsx';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Chatbot from './components/Chatbot';
-import ReportGeneration from './components/ReportGeneration.jsx';
+import ReportGeneration from './pages/Safety-Officer/ReportGeneration.jsx';
 
 
 //Supervisor interface
-import Dashboard from './pages/Dashboard';
-import Logbook from './pages/Logbook';
-import Hazard from './pages/Hazard';
+import Dashboard from './pages/Supervisor/Dashboard';
+import Logbook from './pages/Supervisor/Logbook';
+import Checklist from './pages/Supervisor/Checklist.jsx';
+import Hazard from './pages/Supervisor/Hazard';
 
 //Safety-Officer
-import SoDashboard from './pages/SoDashboard';
-import Checklist from './pages/Checklist.jsx';
-import newHazards from './pages/NewHazards.jsx';
-import SMPmanagement from './pages/SMPmanagment.jsx';
-import NewHazards from './pages/NewHazards.jsx';
+import SoDashboard from './pages/Safety-Officer/SoDashboard.jsx';
+import SMPmanagement from './pages/Safety-Officer/SMPmanagment.jsx';
+import NewHazards from './pages/Safety-Officer/NewHazards.jsx';
 
 
 
@@ -64,11 +63,12 @@ function App() {
   return (
     <Router>
       <Routes>
+
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
-        {/* Supervisor */}
+        {/* Supervisor ROUTES*/}
         <Route
           path="/admin/dashboard"
           element={
@@ -87,23 +87,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/user/home"
-          element={
-            <ProtectedRoute
-              requiredRole="USER"
-              element={
-                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
-                  <Header toggleSidebar={toggleSidebar} />
-                  <Sidebar isExpanded={isSidebarExpanded} />
-                  <main className="main-content">
-                    <SoDashboard />
-                  </main>
-                </div>
-              }
-            />
-          }
-        />
+        
         <Route
           path="/logbook"
           element={
@@ -173,6 +157,25 @@ function App() {
             />
           }
         />
+
+        {/*SAFETY OFFICER ROUTES */}
+        <Route
+          path="/user/home"
+          element={
+            <ProtectedRoute
+              requiredRole="USER"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <SoDashboard />
+                  </main>
+                </div>
+              }
+            />
+          }
+        />
         <Route
           path="/SMPmanagement"
           element={
@@ -192,7 +195,25 @@ function App() {
           }
         />
         <Route
-          path="/NewHazards"
+          path="/controlMeasures"
+          element={
+            <ProtectedRoute
+              requiredRole="USER"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <SMPmanagement />
+                  </main>
+                 
+                </div>
+              }
+            />
+          }
+        />
+        <Route
+          path="/newHazards"
           element={
             <ProtectedRoute
               requiredRole="USER"
