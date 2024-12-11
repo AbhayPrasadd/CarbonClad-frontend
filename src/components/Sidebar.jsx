@@ -35,7 +35,7 @@ const Sidebar = ({ isExpanded }) => {
 
      // Manager Sidebar
      { path: '/manager/dashboard', icon: <BsPersonFill />, label: 'Dashboard', roles: ['MANAGER'] },
-     { path: '/customlogBook', icon: <BsFileText />, label: 'Custom Log', roles: ['MANAGER'] },
+     { path: '/customLogBook', icon: <BsFileText />, label: 'Custom Log', roles: ['MANAGER'] },
      
     
      

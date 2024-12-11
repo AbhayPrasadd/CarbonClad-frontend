@@ -28,7 +28,9 @@ import SMPmanagement from './pages/Safety-Officer/SMPmanagment.jsx';
 //report generation page 
 import NewHazards from './pages/Safety-Officer/NewHazards.jsx';
 
+//mine manager
 import ManagerDashboard from './pages/manager/Manager.jsx';
+import LogbookBuilder from './pages/manager/LogbookBuilder.jsx';
 
 
 
@@ -89,6 +91,23 @@ function App() {
                   <Sidebar isExpanded={isSidebarExpanded} />
                   <main className="main-content">
                     <ManagerDashboard />
+                  </main>
+                </div>
+              }
+            />
+          }
+        />
+        <Route
+          path="/customLogbook"
+          element={
+            <ProtectedRoute
+              requiredRole="MANAGER"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <LogbookBuilder />
                   </main>
                 </div>
               }
