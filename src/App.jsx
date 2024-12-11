@@ -15,9 +15,9 @@ import ReportGeneration from './pages/Safety-Officer/ReportGeneration.jsx';
 //Supervisor interface
 import Dashboard from './pages/Supervisor/Dashboard';
 import Logbook from './pages/Supervisor/Logbook';
-import Checklist from './pages/Supervisor/Checklist.jsx';
 import SMPModule from './pages/Supervisor/SMPModule.jsx';
 import Hazard from './pages/Supervisor/Hazard';
+import Custom from './Custom.jsx';
 
 //Safety-Officer
 import SoDashboard from './pages/Safety-Officer/SoDashboard.jsx';
@@ -162,7 +162,7 @@ function App() {
                   <Header toggleSidebar={toggleSidebar} />
                   <Sidebar isExpanded={isSidebarExpanded} />
                   <main className="main-content">
-                    <Logbook />
+                    <Custom/>
                   </main>
                 </div>
               }
@@ -205,23 +205,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/smp"
-          element={
-            <ProtectedRoute
-              requiredRole="ADMIN"
-              element={
-                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
-                  <Header toggleSidebar={toggleSidebar} />
-                  <Sidebar isExpanded={isSidebarExpanded} />
-                  <main className="main-content">
-                    <Checklist />
-                  </main>
-                </div>
-              }
-            />
-          }
-        />
+        
         <Route
           path="/hazard"
           element={

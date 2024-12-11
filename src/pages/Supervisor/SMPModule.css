@@ -1,39 +1,40 @@
-.smp-module {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  .tabs {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  
-  .tabs button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .tabs button.active {
-    background-color: #0056b3;
-  }
-  
-  .tabs button:hover {
-    background-color: #0056b3;
-  }
-  
-  .tab-content {
-    padding: 20px;
-    border-top: 1px solid #ccc;
-  }
-  
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px; /* Add spacing between buttons */
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.tabs button.active {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slightly enlarge the active tab */
+}
+
+.tabs button:hover {
+  background-color: #0056b3;
+}
+
+.tab-content {
+  padding: 20px;
+  border-top: 1px solid #ccc;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow to the tab content */
+}

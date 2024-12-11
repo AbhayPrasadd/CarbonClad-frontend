@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import './VentilationDevices.css';
+import React from "react";
+import "./Log3.css";
 
-const VentilationDevices = () => {
-  const [devices, setDevices] = useState([
-    { id: 1, name: "Air crossing", condition: "Yes", action: "" },
-    { id: 2, name: "Stopping", condition: "Yes", action: "" },
-    { id: 3, name: "Doors", condition: "Yes", action: "" },
-  ]);
-
-  const handleChange = (id, field, value) => {
+const LogbookForm = ({ devices, setDevices }) => {
+  const handleDeviceChange = (id, field, value) => {
     const updatedDevices = devices.map((device) =>
       device.id === id ? { ...device, [field]: value } : device
     );
@@ -17,13 +11,13 @@ const VentilationDevices = () => {
 
   return (
     <div className="ventilation-devices">
-      <h2>Ventilation Devices/Appliances</h2>
+      <h2>Ventilation Devices</h2>
       <table>
         <thead>
           <tr>
-            <th>Device/Appliance</th>
-            <th>Condition (Yes/No)</th>
-            <th>Remedial Action (if No)</th>
+            <th>Device</th>
+            <th>Condition</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -33,7 +27,9 @@ const VentilationDevices = () => {
               <td>
                 <select
                   value={device.condition}
-                  onChange={(e) => handleChange(device.id, "condition", e.target.value)}
+                  onChange={(e) =>
+                    handleDeviceChange(device.id, "condition", e.target.value)
+                  }
                 >
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -45,7 +41,9 @@ const VentilationDevices = () => {
                     type="text"
                     placeholder="Enter action taken"
                     value={device.action}
-                    onChange={(e) => handleChange(device.id, "action", e.target.value)}
+                    onChange={(e) =>
+                      handleDeviceChange(device.id, "action", e.target.value)
+                    }
                   />
                 )}
               </td>
@@ -57,4 +55,4 @@ const VentilationDevices = () => {
   );
 };
 
-export default VentilationDevices;
+export default LogbookForm;
