@@ -26,6 +26,7 @@ const Login = ({ onLogin }) => {
         const userRole = response.data.data.userRole;
         if (userRole === "ADMIN") navigate("/admin/dashboard");
         else if (userRole === "USER") navigate("/user/home");
+        else if (userRole === "MANAGER") navigate("/manager/dashboard");
         else setResponseMessage("Unknown user role. Please contact support.");
       } else {
         setResponseMessage("Login failed. Please try again.");

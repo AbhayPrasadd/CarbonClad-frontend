@@ -28,6 +28,8 @@ import SMPmanagement from './pages/Safety-Officer/SMPmanagment.jsx';
 //report generation page 
 import NewHazards from './pages/Safety-Officer/NewHazards.jsx';
 
+import ManagerDashboard from './pages/manager/Manager.jsx';
+
 
 
 function App() {
@@ -74,6 +76,25 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/register" element={<Registration />} />
+
+         {/* Manager Routes */}
+         <Route
+          path="/manager/dashboard"
+          element={
+            <ProtectedRoute
+              requiredRole="MANAGER"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <ManagerDashboard />
+                  </main>
+                </div>
+              }
+            />
+          }
+        />
 
         {/* Supervisor ROUTES*/}
         <Route

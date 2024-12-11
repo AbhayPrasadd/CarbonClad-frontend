@@ -9,6 +9,7 @@ import {
   BsDisplay,
   BsExclamationOctagon,
   BsExclamationTriangle,
+  BsPersonFill
 } from 'react-icons/bs';
 import './Sidebar.css';
 
@@ -30,6 +31,12 @@ const Sidebar = ({ isExpanded }) => {
     { path: '/newHazards', icon: <BsExclamationOctagon />, label: 'Hazards', roles: ['USER'] },
     { path: '/compliance', icon: <BsExclamationOctagon />, label: 'Compliance', roles: ['USER'] },
     { path: '/report', icon: <BsExclamationTriangle />, label: 'REPORT', roles: ['USER'] },
+
+
+     // Manager Sidebar
+     { path: '/manager/dashboard', icon: <BsPersonFill />, label: 'Dashboard', roles: ['MANAGER'] },
+     { path: '/customlogBook', icon: <BsFileText />, label: 'Custom Log', roles: ['MANAGER'] },
+     
     
      
     //common to supervisor and safety-officer
