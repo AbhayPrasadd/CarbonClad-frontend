@@ -1,123 +1,91 @@
 import React, { useState } from 'react';
 import './Hazard.css';
 
-function Hazard() {
-  const [formData, setFormData] = useState({
-    hazardType: '',
-    location: '',
-    description: '',
-    severity: '',
-    reportedBy: '',
-    date: '',
-  });
+const Hazard= () => {
+  const [message, setMessage] = useState('');
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Hazard Report Submitted:', formData);
-    alert('Hazard Report Submitted Successfully!');
-    // Reset form
-    setFormData({
-      hazardType: '',
-      location: '',
-      description: '',
-      severity: '',
-      reportedBy: '',
-      date: '',
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setMessage('Hazard report submitted successfully!');
   };
 
   return (
-    <div className="hazard-reporting">
-      <h2>Hazard Reporting Form</h2>
-      <form onSubmit={handleSubmit} className="hazard-form">
-        <label>
-          Hazard Type:
-          <input
-            type="text"
-            name="hazardType"
-            value={formData.hazardType}
-            onChange={handleChange}
-            placeholder="e.g., Gas Leak, Roof Fall"
-            required
-          />
-        </label>
+    <div className="container">
+      <h1>Hazard Reporting Form</h1>
+      <div className="section-title">
+        <span>Supervisor Details</span>
+        <input
+          type="date"
+          id="reportDate"
+          name="reportDate"
+          className="date-input"
+          required
+        />
+      </div>
+      <form onSubmit={handleSubmit} id="hazardForm">
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="name">Supervisor Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="mineName">Mine Name</label>
+            <input type="text" id="mineName" name="mineName" placeholder="Enter mine name" required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="hazardLocation">Hazard Location</label>
+            <input type="text" id="hazardLocation" name="hazardLocation" placeholder="Enter hazard location" required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="natureOfHazard">Nature of Hazard</label>
+            <select id="natureOfHazard" name="natureOfHazard" required>
+              <option value="Ventilation">Ventilation Issues</option>
+              <option value="Roof">Unstable Roof/Sides</option>
+              <option value="Mechanical">Mechanical Faults</option>
+              <option value="LooseMaterials">Loose Rocks/Materials</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
 
-        <label>
-          Location:
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            placeholder="e.g., Section B, Zone 3"
-            required
-          />
-        </label>
-
-        <label>
-          Description:
+        <div className="form-group">
+          <label htmlFor="hazardDescription">Hazard Description</label>
           <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Provide a detailed description of the hazard"
+            id="hazardDescription"
+            name="hazardDescription"
+            rows="4"
+            placeholder="Describe the hazard"
             required
-          />
-        </label>
+          ></textarea>
+        </div>
 
-        <label>
-          Severity:
-          <select
-            name="severity"
-            value={formData.severity}
-            onChange={handleChange}
-            required
-          >
-            <option value="" disabled>
-              Select Severity
-            </option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-            <option value="Critical">Critical</option>
-          </select>
-        </label>
+        <div className="form-group">
+          <label htmlFor="actionTaken">Immediate Action Taken</label>
+          <textarea
+            id="actionTaken"
+            name="actionTaken"
+            rows="4"
+            placeholder="Describe actions taken (if any)"
+          ></textarea>
+        </div>
 
-        <label>
-          Reported By:
-          <input
-            type="text"
-            name="reportedBy"
-            value={formData.reportedBy}
-            onChange={handleChange}
-            placeholder="Your Name"
-            required
-          />
-        </label>
+        <div className="section-title">Acknowledgment</div>
+        <div className="form-group checkbox">
+          <input type="checkbox" id="acknowledgment" name="acknowledgment" required />
+          <label htmlFor="acknowledgment">
+            I confirm that the information provided is accurate to the best of my knowledge. I understand that providing false
+            information may result in consequences.
+          </label>
+        </div>
 
-        <label>
-          Date:
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <button type="submit">Submit Hazard Report</button>
+        <div className="sticky-button">
+          <button type="submit">Submit Report</button>
+        </div>
       </form>
+
+      {message && <div className={message.success}>{message}</div>}
     </div>
   );
-}
+};
 
 export default Hazard;

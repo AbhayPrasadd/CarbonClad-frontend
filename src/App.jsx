@@ -16,6 +16,7 @@ import ReportGeneration from './pages/Safety-Officer/ReportGeneration.jsx';
 import Dashboard from './pages/Supervisor/Dashboard';
 import Logbook from './pages/Supervisor/Logbook';
 import SMPModule from './pages/Supervisor/SMPModule.jsx';
+import ShiftHandover from './pages/Supervisor/ShiftHandover.jsx';
 import Hazard from './pages/Supervisor/Hazard';
 import Custom from './Custom.jsx';
 
@@ -153,7 +154,7 @@ function App() {
           }
         />
           <Route
-          path="/shiftHandover"
+          path="/ShiftHandover"
           element={
             <ProtectedRoute
               requiredRole="ADMIN"
@@ -162,7 +163,7 @@ function App() {
                   <Header toggleSidebar={toggleSidebar} />
                   <Sidebar isExpanded={isSidebarExpanded} />
                   <main className="main-content">
-                    <Custom/>
+                    <ShiftHandover/>
                   </main>
                 </div>
               }
