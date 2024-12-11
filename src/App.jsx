@@ -234,7 +234,7 @@ function App() {
                   <main className="main-content">
                     <Hazard />
                   </main>
-                  <Chatbot />
+                
                 </div>
               }
             />

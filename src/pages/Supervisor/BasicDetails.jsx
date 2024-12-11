@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './BasicDetails.css';
 
 const BasicDetails = ({ details, setDetails }) => {
@@ -7,9 +7,28 @@ const BasicDetails = ({ details, setDetails }) => {
     setDetails({ ...details, [name]: value });
   };
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setDetails((prevDetails) => ({
+            ...prevDetails,
+            latitude: latitude.toFixed(6),
+            longitude: longitude.toFixed(6),
+          }));
+        },
+        (error) => {
+          console.error("Error fetching geolocation: ", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, [setDetails]);
+
   return (
     <div className="basic-details">
-      
       <div className="form-group">
         <label>Name of Mine:</label>
         <input
@@ -68,6 +87,28 @@ const BasicDetails = ({ details, setDetails }) => {
             value={details.shiftHours || ""}
             onChange={handleChange}
             placeholder="Enter shift and hours"
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="form-group">
+          <label>Latitude:</label>
+          <input
+            type="text"
+            name="latitude"
+            value={details.latitude || ""}
+            readOnly
+            placeholder="Fetching latitude..."
+          />
+        </div>
+        <div className="form-group">
+          <label>Longitude:</label>
+          <input
+            type="text"
+            name="longitude"
+            value={details.longitude || ""}
+            readOnly
+            placeholder="Fetching longitude..."
           />
         </div>
       </div>

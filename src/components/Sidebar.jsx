@@ -19,9 +19,10 @@ const Sidebar = ({ isExpanded }) => {
     //supervisor sidebar
     { path: '/admin/dashboard', icon: <BsFillHouseDoorFill />, label: 'DASHBOARD', roles: ['ADMIN'] },
     { path: '/logbook', icon: <BsFillBoxFill />, label: 'LOGBOOK', roles: ['ADMIN'] },
-    { path: '/shiftHandover', icon: <BsFillBoxFill />, label: 'Shift Handover', roles: ['ADMIN'] },
-    { path: '/smpModule', icon: <BsExclamationOctagon />, label: 'SMP-view', roles: ['ADMIN'] },
+    { path: '/shiftHandover', icon: <BsFillBoxFill />, label: 'CUSTOM LOGS', roles: ['ADMIN'] },
     { path: '/hazard', icon: <BsFileText />, label: 'HAZARD', roles: ['ADMIN'] },
+    { path: '/smpModule', icon: <BsExclamationOctagon />, label: 'SAFETY MANAGEMENT', roles: ['ADMIN'] },
+   
 
      //safety officer sidebar
     { path: '/user/home', icon: <BsFillHouseDoorFill />, label: 'Dashboard', roles: ['USER'] },

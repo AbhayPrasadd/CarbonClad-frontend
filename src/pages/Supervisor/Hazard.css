@@ -1,55 +1,47 @@
-.hazard-reporting {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hazard-reporting h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .hazard-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .hazard-form label {
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .hazard-form input,
-  .hazard-form textarea,
-  .hazard-form select {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
-  
-  .hazard-form textarea {
-    resize: vertical;
-  }
-  
-  .hazard-form button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .hazard-form button:hover {
-    background-color: #218838;
-  }
-  
+.hazard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.hazard-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.hazard-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.hazard-form input,
+.hazard-form textarea,
+.hazard-form select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.hazard-form textarea {
+  resize: vertical;
+}
+
+.hazard-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hazard-form button:hover {
+  background-color: #218838;
+}
