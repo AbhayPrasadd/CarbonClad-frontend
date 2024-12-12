@@ -90,3 +90,18 @@ h1 {
   font-size: 18px;
   color: #555;
 }
+.generate-pdf-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.generate-pdf-button:hover {
+  background-color: #0056b3;
+}

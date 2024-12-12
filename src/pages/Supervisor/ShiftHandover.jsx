@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import "./ShiftHandover.css";
 
 const ShiftHandover = () => {
@@ -31,6 +33,18 @@ const ShiftHandover = () => {
     fetchLogbooks(selectedShift); // Fetch data for the selected shift
   };
 
+  const generatePDF = () => {
+    const input = document.getElementById("logbook-container");
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`Shift-${shift}-logbook-details.pdf`);
+    });
+  };
+
   if (loading) {
     return <div className="loading">Loading logbooks...</div>;
   }
@@ -49,7 +63,11 @@ const ShiftHandover = () => {
         </select>
       </div>
 
-      <div className="logbook-container">
+      <button className="generate-pdf-button" onClick={generatePDF}>
+        Download PDF
+      </button>
+
+      <div id="logbook-container" className="logbook-container">
         {logbooks.length > 0 ? (
           logbooks.map((logbook, index) => (
             <div key={index} className="logbook-card">
