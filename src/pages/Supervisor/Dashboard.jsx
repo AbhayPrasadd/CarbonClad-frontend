@@ -1,91 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import './Dashboard.css'; // Ensure your CSS is linked correctly
+import React from "react";
+import { Bar, Line, Pie, Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement);
 
 const Dashboard = () => {
-  const [data, setData] = useState(null); // State to hold fetched data
-  const [loading, setLoading] = useState(true); // State to show loading spinner
+  // Example Data for Charts
+  const productionData = {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    datasets: [
+      {
+        label: "Production (tons)",
+        data: [200, 220, 180, 250, 300, 270, 320],
+        backgroundColor: "#4CAF50",
+      },
+    ],
+  };
 
-  // Fetch the dummy data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/dummyData.json'); // File is in the public folder
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const jsonData = await response.json();
-        setData(jsonData); // Set the fetched data
-        setLoading(false); // Set loading to false
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false); // Stop loading on error
-      }
-    };
+  const hazardData = {
+    labels: ["Low", "Medium", "High"],
+    datasets: [
+      {
+        label: "Hazard Levels",
+        data: [10, 5, 2],
+        backgroundColor: ["#FFEB3B", "#FF9800", "#F44336"],
+      },
+    ],
+  };
 
-    fetchData();
-  }, []);
+  const shiftPerformanceData = {
+    labels: ["Shift A", "Shift B", "Shift C"],
+    datasets: [
+      {
+        label: "Shift Performance (%)",
+        data: [80, 75, 90],
+        backgroundColor: ["#2196F3", "#3F51B5", "#673AB7"],
+      },
+    ],
+  };
 
-  // Show a loading spinner or message while data is being fetched
-  if (loading) return <p>Loading...</p>;
-
-  // Handle empty data
-  if (!data) return <p>No data available</p>;
-
-  // Destructure the fetched data
-  const { summary, pastShifts, safetyIssues } = data;
+  const equipmentStatusData = {
+    labels: ["Operational", "Under Maintenance", "Faulty"],
+    datasets: [
+      {
+        data: [60, 30, 10],
+        backgroundColor: ["#4CAF50", "#FFC107", "#F44336"],
+      },
+    ],
+  };
 
   return (
-    <div className="main-content-container">
-      
+    <div className="bg-gray-100 p-6 min-h-screen flex">
+      {/* Left Side: Charts */}
+      <div className="w-3/4 grid grid-cols-2 gap-4">
+        {/* Production Rate Bar Chart */}
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700">Production Rate</h2>
+          <Bar data={productionData} options={{ responsive: true }} />
+        </div>
 
-      {/* Summary Cards */}
-      <div className="summary-cards">
-        {summary.map((item, index) => (
-          <div className="card" key={index}>
-            <h2>{item.title}</h2>
-            <p>
-              {item.metric1.label}: <strong>{item.metric1.value}</strong>
-            </p>
-            <p>
-              {item.metric2.label}: <strong>{item.metric2.value}</strong>
-            </p>
-          </div>
-        ))}
+        {/* Hazard Alerts Pie Chart */}
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700">Hazard Alerts</h2>
+          <Pie data={hazardData} options={{ responsive: true }} />
+        </div>
+
+        {/* Shift Performance Line Chart */}
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700">Shift Performance</h2>
+          <Line data={shiftPerformanceData} options={{ responsive: true }} />
+        </div>
+
+        {/* Equipment Status Doughnut Chart */}
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700">Equipment Status</h2>
+          <Doughnut data={equipmentStatusData} options={{ responsive: true }} />
+        </div>
       </div>
 
-      {/* Past Shift Summary Table */}
-      <div className="past-shift-summary">
-        <h2>Past Shift Summary</h2>
-        <table>
-          <thead>
-            <tr>
-              {Object.keys(pastShifts[0]).map((header, index) => (
-                <th key={index}>{header.replace(/([A-Z])/g, ' $1')}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {pastShifts.map((shift, index) => (
-              <tr key={index}>
-                {Object.values(shift).map((value, idx) => (
-                  <td key={idx}>{value}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Safety Issues Section */}
-      <div className="safety-issues">
-        <h2>Safety Issues</h2>
-        <ul>
-          {safetyIssues.map((issue, index) => (
-            <li key={index}>
-              <strong>{issue.name}</strong> – Severity: {issue.severity} – Action Needed: {issue.action}
-            </li>
-          ))}
-        </ul>
+      {/* Right Side: Information Section */}
+      <div className="w-1/4 flex flex-col gap-4 ml-4">
+        {/* Cubical Boxes */}
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <h2 className="text-md font-semibold text-gray-700">Daily Production</h2>
+          <p className="text-gray-600">Target: 300 tons<br />Achieved: 270 tons</p>
+        </div>
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <h2 className="text-md font-semibold text-gray-700">Hazard Alerts</h2>
+          <p className="text-gray-600">Low: 10<br />Medium: 5<br />High: 2</p>
+        </div>
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <h2 className="text-md font-semibold text-gray-700">Shift Summary</h2>
+          <p className="text-gray-600">Shift A: 80%<br />Shift B: 75%<br />Shift C: 90%</p>
+        </div>
+        <div className="bg-white shadow-lg rounded-lg p-4">
+          <h2 className="text-md font-semibold text-gray-700">Equipment Status</h2>
+          <p className="text-gray-600">Operational: 60%<br />Maintenance: 30%<br />Faulty: 10%</p>
+        </div>
       </div>
     </div>
   );

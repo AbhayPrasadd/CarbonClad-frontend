@@ -1,39 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import jsPDF from "jspdf";
-
-import html2canvas from "html2canvas";
-
+import "./ShiftHandover.css";
 
 const ShiftHandover = () => {
   const [logbooks, setLogbooks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [shift, setShift] = useState("Shift 1"); // Default shift
+
+  const fetchLogbooks = async (selectedShift) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`http://localhost:5004/logbook/${selectedShift}`);
+      setLogbooks(response.data);
+    } catch (error) {
+      console.error("Error fetching logbooks:", error);
+      setLogbooks([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchLogbooks = async () => {
-      try {
-        const response = await axios.get("http://localhost:5004/logbook");
-        setLogbooks(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching logbooks:", error);
-        setLoading(false);
-      }
-    };
+    // Fetch data for the default shift when the component mounts
+    fetchLogbooks(shift);
+  }, [shift]);
 
-    fetchLogbooks();
-  }, []);
-
-  const generatePDF = () => {
-    const input = document.getElementById("logbook-content");
-    html2canvas(input, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("logbook-details.pdf");
-    });
+  const handleShiftChange = (e) => {
+    const selectedShift = e.target.value;
+    setShift(selectedShift);
+    fetchLogbooks(selectedShift); // Fetch data for the selected shift
   };
 
   if (loading) {
@@ -42,41 +37,57 @@ const ShiftHandover = () => {
 
   return (
     <div className="logbook-display">
-      <h1>Logbook Shift Details</h1>
-      <button onClick={generatePDF} className="generate-pdf-button">
-        Download PDF
-      </button>
-      <div id="logbook-content">
+      <h1>Shift-Wise Logbook Details</h1>
+
+      {/* Shift Selection Dropdown */}
+      <div className="shift-selection">
+        <label htmlFor="shift">Select Shift:</label>
+        <select id="shift" value={shift} onChange={handleShiftChange}>
+          <option value="Shift 1">Shift 1</option>
+          <option value="Shift 2">Shift 2</option>
+          <option value="Shift 3">Shift 3</option>
+        </select>
+      </div>
+
+      <div className="logbook-container">
         {logbooks.length > 0 ? (
           logbooks.map((logbook, index) => (
             <div key={index} className="logbook-card">
-              <h2>Basic Details</h2>
+              <h2>Shift: {logbook.basicDetails.shift}</h2>
               <table className="logbook-table">
                 <tbody>
                   <tr>
-                    <td><strong>Supervisor Name</strong></td>
+                    <td><strong>Supervisor Name:</strong></td>
                     <td>{logbook.basicDetails.supervisorName}</td>
                   </tr>
                   <tr>
-                    <td><strong>Inspection Time</strong></td>
+                    <td><strong>Inspection Time:</strong></td>
                     <td>{logbook.basicDetails.inspectionTime}</td>
                   </tr>
                   <tr>
-                    <td><strong>Shift</strong></td>
-                    <td>{logbook.basicDetails.shift}</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Mine Name</strong></td>
+                    <td><strong>Mine Name:</strong></td>
                     <td>{logbook.basicDetails.mineName}</td>
                   </tr>
                   <tr>
-                    <td><strong>Date</strong></td>
+                    <td><strong>Seam Name:</strong></td>
+                    <td>{logbook.basicDetails.seamName}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>District:</strong></td>
+                    <td>{logbook.basicDetails.district1}, {logbook.basicDetails.district2}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Date:</strong></td>
                     <td>{logbook.basicDetails.date}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Parts Inspected:</strong></td>
+                    <td>{logbook.basicDetails.partsInspected}</td>
                   </tr>
                 </tbody>
               </table>
 
-              <h2>Safety Materials</h2>
+              <h3>Safety Materials</h3>
               <table className="logbook-table">
                 <thead>
                   <tr>
@@ -86,11 +97,8 @@ const ShiftHandover = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {logbook.safetyMaterials.map((material) => (
-                    <tr
-                      key={material.id}
-                      className={material.status !== "Good" ? "highlight-red" : ""}
-                    >
+                  {logbook.safetyMaterials.map((material, idx) => (
+                    <tr key={idx}>
                       <td>{material.name}</td>
                       <td>{material.status}</td>
                       <td>{material.action}</td>
@@ -99,7 +107,7 @@ const ShiftHandover = () => {
                 </tbody>
               </table>
 
-              <h2>Ventilation Devices</h2>
+              <h3>Ventilation Devices</h3>
               <table className="logbook-table">
                 <thead>
                   <tr>
@@ -109,11 +117,8 @@ const ShiftHandover = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {logbook.ventilationDevices.map((device) => (
-                    <tr
-                      key={device.id}
-                      className={device.condition !== "Operational" ? "highlight-red" : ""}
-                    >
+                  {logbook.ventilationDevices.map((device, idx) => (
+                    <tr key={idx}>
                       <td>{device.name}</td>
                       <td>{device.condition}</td>
                       <td>{device.action}</td>
@@ -121,39 +126,10 @@ const ShiftHandover = () => {
                   ))}
                 </tbody>
               </table>
-
-              <h2>Safety Observations</h2>
-              <table className="logbook-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {logbook.safetyObservations.length > 0 ? (
-                    logbook.safetyObservations.map((observation, idx) => (
-                      <tr
-                        key={idx}
-                        className={observation.status !== "Functional" ? "highlight-red" : ""}
-                      >
-                        <td>{observation.name}</td>
-                        <td>{observation.status}</td>
-                        <td>{observation.action}</td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="3">No safety observations recorded.</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
             </div>
           ))
         ) : (
-          <p>No logbook data available.</p>
+          <p>No logbook data available for {shift}.</p>
         )}
       </div>
     </div>
