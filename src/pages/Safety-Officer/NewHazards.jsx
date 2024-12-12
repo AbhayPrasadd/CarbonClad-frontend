@@ -1,57 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./NewHazards.css";
 
 const NewHazards = () => {
-  // Sample data for hazards reported
-  const [hazards, setHazards] = useState([
-    {
-      id: 1,
-      description: "Slippery floor near conveyor belt",
-      reportedBy: "Supervisor - John Doe",
-      date: "2024-12-08",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      description: "Loose electrical wiring in shaft 3",
-      reportedBy: "Operator - Jane Smith",
-      date: "2024-12-07",
-      status: "In Progress",
-    },
-    {
-      id: 3,
-      description: "Damaged railing on staircase",
-      reportedBy: "Supervisor - Alex Brown",
-      date: "2024-12-06",
-      status: "Resolved",
-    },
-  ]);
+  const [hazards, setHazards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchHazards = async () => {
+      try {
+        const response = await axios.get("https://sihfinale-1.onrender.com/api/hazards");
+        setHazards(response.data);
+        setError("");
+      } catch (err) {
+        setError(
+          err.response
+            ? `Error: ${err.response.data.message}`
+            : "Network Error. Please check the backend server."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHazards();
+  }, []);
 
   return (
-    <div>
-      
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Description</th>
-            <th>Reported By</th>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {hazards.map((hazard) => (
-            <tr key={hazard.id}>
-              <td>{hazard.id}</td>
-              <td>{hazard.description}</td>
-              <td>{hazard.reportedBy}</td>
-              <td>{hazard.date}</td>
-              <td>{hazard.status}</td>
+    <div className="hazards-container">
+      <h1>Hazards Reported</h1>
+      {loading ? (
+        <div className="loader">Loading...</div>
+      ) : error ? (
+        <div className="error-message">{error}</div>
+      ) : (
+        <table className="hazards-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Description</th>
+              <th>Reported By</th>
+              <th>Date</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {hazards.length > 0 ? (
+              hazards.map((hazard, index) => (
+                <tr key={hazard._id}>
+                  <td>{index + 1}</td>
+                  <td>{hazard.hazardDescription}</td>
+                  <td>{hazard.name}</td>
+                  <td>{hazard.reportDate}</td>
+                  <td>Pending</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="no-data">
+                  No hazards reported yet.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

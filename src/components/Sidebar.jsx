@@ -26,11 +26,8 @@ const Sidebar = ({ isExpanded }) => {
 
      //safety officer sidebar
     { path: '/user/home', icon: <BsFillHouseDoorFill />, label: 'Dashboard', roles: ['USER'] },
-    { path: '/inspectionReport', icon: <BsExclamationOctagon />, label: 'Inspection Logbook', roles: ['USER'] },
     { path: '/SMPmanagement', icon: <BsExclamationOctagon />, label: 'Safety Mangement ', roles: ['USER'] },
-    { path: '/controlMeasures', icon: <BsExclamationOctagon />, label: 'Control Measures ', roles: ['USER'] },
     { path: '/newHazards', icon: <BsExclamationOctagon />, label: 'Hazards', roles: ['USER'] },
-    { path: '/compliance', icon: <BsExclamationOctagon />, label: 'Compliance', roles: ['USER'] },
     { path: '/report', icon: <BsExclamationTriangle />, label: 'REPORT', roles: ['USER'] },
 
 
@@ -42,8 +39,7 @@ const Sidebar = ({ isExpanded }) => {
      
     //common to supervisor and safety-officer
     { path: '/erp', icon: <BsDisplay />, label: 'ERP', roles: ['ADMIN'] },
-    { path: '/help', icon: <BsQuestionCircle />, label: 'HELP', roles: ['ADMIN', 'USER'] },
-    { path: '/settings', icon: <BsFillGearFill />, label: 'SETTINGS', roles: ['ADMIN', 'USER'] },
+  
   ];
   
    // Fetch user role from localStorage

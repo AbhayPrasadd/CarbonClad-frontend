@@ -1,35 +1,182 @@
-.smp-container {
+/* Prefix every selector with .smp-module to scope it to SmpManagement component */
+
+/* Global Container */
+.smp-module {
   font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  background-color: #f4f7fc;
+  color: #333;
+  line-height: 1.6;
 }
 
-.tab-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.smp-module a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.smp-module header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.smp-module header h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.smp-module section {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dfe6e9;
+}
+
+.smp-module h2 {
+  font-size: 22px;
+  color: #34495e;
   margin-bottom: 20px;
+  padding-left: 10px; /* Keep consistent padding */
 }
 
-.tab-container button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+/* Forms (Inputs, Selects, Buttons) */
+.smp-module input,
+.smp-module select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #dfe6e9;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.smp-module input:focus,
+.smp-module select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.smp-module button {
+  background-color: #3498db;
+  color: #fff;
   border: none;
+  padding: 10px 20px;
+  font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.smp-module button:hover {
+  background-color: #2980b9;
+}
+
+.smp-module button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Tables */
+.smp-module table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.smp-module table th,
+.smp-module table td {
+  text-align: left;
+  padding: 12px 15px;
+  border: 1px solid #dfe6e9;
+}
+
+.smp-module table th {
+  background-color: #3498db;
+  color: #fff;
+  font-size: 16px;
+}
+
+.smp-module table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.smp-module table tr:hover {
+  background-color: #ecf0f1;
+}
+
+.smp-module table td {
   font-size: 14px;
 }
 
-.tab-container button.active {
-  background-color: #28a745;
+/* Section-Specific Styles */
+.smp-module .hazard-section input,
+.smp-module .control-measures-section input,
+.smp-module .task-section input,
+.smp-module .task-section select {
+  width: calc(100% - 20px);
+  display: inline-block;
+  margin-right: 10px;
 }
 
-.tab-container button:hover {
-  background-color: #0056b3;
+.smp-module .task-section table td button {
+  margin-right: 5px;
 }
 
-.component-container {
-  padding-top: 10px;
+/* Risk Assessment Section */
+.smp-module .risk-assessment-section table th,
+.smp-module .risk-assessment-section table td {
+  text-align: center;
+}
+
+/* Buttons for Specific Actions */
+.smp-module button.close {
+  background-color: #2ecc71;
+}
+
+.smp-module button.close:hover {
+  background-color: #27ae60;
+}
+
+.smp-module button.delete {
+  background-color: #e74c3c;
+}
+
+.smp-module button.delete:hover {
+  background-color: #c0392b;
+}
+
+.smp-module .no-data {
+  text-align: center;
+  font-style: italic;
+  color: #7f8c8d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .smp-module {
+    padding: 15px;
+  }
+
+  .smp-module header h1 {
+    font-size: 24px;
+  }
+
+  .smp-module h2 {
+    font-size: 18px;
+  }
+
+  .smp-module table th,
+  .smp-module table td {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .smp-module input,
+  .smp-module select,
+  .smp-module button {
+    font-size: 14px;
+  }
+
+  .smp-module button {
+    padding: 8px 15px;
+  }
 }

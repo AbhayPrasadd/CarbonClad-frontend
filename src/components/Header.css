@@ -1,3 +1,4 @@
+/* Scoped styles for Header component */
 .header {
   grid-area: header;
   height: 60px;
@@ -32,7 +33,6 @@
 .hamburger-icon {
   font-size: 1.5rem;
   cursor: pointer;
-  /* Adjust margin for spacing */
 }
 
 .header-right {
@@ -50,4 +50,36 @@
 
 .icon:hover {
   color: #3498db; /* Hover effect for icons */
+}
+
+.profile-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #dfe6e9;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 1001;
+}
+
+.dropdown-menu button {
+  background-color: transparent;
+  border: none;
+  color: #34495e;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f4f7fc;
 }

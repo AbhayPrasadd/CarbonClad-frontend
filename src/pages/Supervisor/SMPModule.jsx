@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import Overview from "./Overview";
 import AssignedTasks from "./AssignedTasks";
 import ReportsFeedback from "./ReportsFeedback";
 import ComplianceMonitoring from "./ComplianceMonitoring";

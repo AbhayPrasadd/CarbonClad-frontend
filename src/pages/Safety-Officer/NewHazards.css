@@ -1,32 +1,70 @@
-h1 {
+/* General container styling */
+.hazards-container {
   font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.hazards-container h1 {
   text-align: center;
   margin-bottom: 20px;
+  color: #333;
 }
 
-table {
-  font-family: Arial, sans-serif;
+/* Table styling */
+.hazards-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
-}
-
-table th,
-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  margin: 20px 0;
+  font-size: 16px;
   text-align: left;
 }
 
-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+.hazards-table th,
+.hazards-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
 }
 
-table tr:nth-child(even) {
+.hazards-table th {
+  background-color: #007bff;
+  color: white;
+  text-align: left;
+}
+
+.hazards-table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-table tr:hover {
-  background-color: #ddd;
+.hazards-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Loader styling */
+.loader {
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
+  margin-top: 20px;
+}
+
+/* Error message styling */
+.error-message {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* No data styling */
+.no-data {
+  text-align: center;
+  font-style: italic;
+  color: #777;
+  padding: 10px;
 }

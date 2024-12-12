@@ -61,15 +61,7 @@ const SafetyOfficerDashboard = () => {
         </div>
       </section>
 
-      {/* Alerts */}
-      <section className="alerts">
-        <h2>Alerts & Notifications</h2>
-        <ul>
-          {alerts.map((alert, index) => (
-            <li key={index}>{alert}</li>
-          ))}
-        </ul>
-      </section>
+      
 
       {/* Recent Hazards */}
       <section className="recent-hazards">

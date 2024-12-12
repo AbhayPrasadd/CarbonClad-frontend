@@ -12,7 +12,7 @@ const ShiftHandover = () => {
   const fetchLogbooks = async (selectedShift) => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5004/logbook/${selectedShift}`);
+      const response = await axios.get(`https://sihfinale-1.onrender.com/logbook/${selectedShift}`);
       setLogbooks(response.data);
     } catch (error) {
       console.error("Error fetching logbooks:", error);

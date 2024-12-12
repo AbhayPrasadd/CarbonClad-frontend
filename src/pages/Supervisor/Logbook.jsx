@@ -36,7 +36,7 @@ const Logbook = () => {
       { id: 5, name: "Brattices", condition: "Yes", action: "" },
       { id: 6, name: "Auxilary", condition: "Yes", action: "" },
       { id: 7, name: "Air Duct", condition: "Yes", action: "" },
-      { id: 8, name: "other vantilation", condition: "Yes", action: "" },
+      { id: 8, name: "other vantilation", condition: "Yes", action: "" }  
       
     ],
     safetyObservations: [],
@@ -53,7 +53,7 @@ const Logbook = () => {
     console.log("Submitting logbook data:", logbookData);
     try {
       const response = await axios.post(
-        "http://localhost:5004/logbook",
+        "https://sihfinale-1.onrender.com/api/logbook",
         logbookData
       );
       alert(response.data.message);

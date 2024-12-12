@@ -15,18 +15,14 @@ import ReportGeneration from './pages/Safety-Officer/ReportGeneration.jsx';
 //Supervisor interface
 import Dashboard from './pages/Supervisor/Dashboard';
 import Logbook from './pages/Supervisor/Logbook';
-import SMPModule from './pages/Supervisor/SMPModule.jsx';
 import ShiftHandover from './pages/Supervisor/ShiftHandover.jsx';
+import SMPModule from './pages/Supervisor/SMPModule.jsx';
 import Hazard from './pages/Supervisor/Hazard';
-import Custom from './Custom.jsx';
+import ERP from './pages/Supervisor/ERP';
 
 //Safety-Officer
 import SoDashboard from './pages/Safety-Officer/SoDashboard.jsx';
-//inspection logbook for safety officer
-import SMPmanagement from './pages/Safety-Officer/SMPmanagment.jsx';
-//control measures page
-//task assignement module 
-//report generation page 
+import SmpManagement from './pages/Safety-Officer/SmpManagement.jsx';
 import NewHazards from './pages/Safety-Officer/NewHazards.jsx';
 
 //mine manager
@@ -187,6 +183,24 @@ function App() {
             />
           }
         />
+         <Route
+          path="/ERP"
+          element={
+            <ProtectedRoute
+              requiredRole="ADMIN"
+              element={
+                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
+                  <Header toggleSidebar={toggleSidebar} />
+                  <Sidebar isExpanded={isSidebarExpanded} />
+                  <main className="main-content">
+                    <ERP/>
+                  </main>
+                 
+                </div>
+              }
+            />
+          }
+        />
         
         
         <Route
@@ -245,7 +259,7 @@ function App() {
           }
         />
         <Route
-          path="/SMPmanagement"
+          path="/smpManagement"
           element={
             <ProtectedRoute
               requiredRole="USER"
@@ -254,7 +268,7 @@ function App() {
                   <Header toggleSidebar={toggleSidebar} />
                   <Sidebar isExpanded={isSidebarExpanded} />
                   <main className="main-content">
-                    <SMPmanagement />
+                    <SmpManagement />
                   </main>
                  
                 </div>
@@ -262,24 +276,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/controlMeasures"
-          element={
-            <ProtectedRoute
-              requiredRole="USER"
-              element={
-                <div className={`app-container ${isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
-                  <Header toggleSidebar={toggleSidebar} />
-                  <Sidebar isExpanded={isSidebarExpanded} />
-                  <main className="main-content">
-                    <SMPmanagement />
-                  </main>
-                 
-                </div>
-              }
-            />
-          }
-        />
+      
         <Route
           path="/newHazards"
           element={
@@ -298,6 +295,7 @@ function App() {
             />
           }
         />
+         
       </Routes>
     </Router>
   );

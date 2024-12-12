@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/auth/login",
+        "https://sihfinale-1.onrender.com/auth/login",
         { email, password, role },
         { headers: { "Content-Type": "application/json" } }
       );
