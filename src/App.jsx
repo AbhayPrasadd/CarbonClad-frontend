@@ -22,7 +22,7 @@ import ERP from './pages/Supervisor/ERP';
 
 //Safety-Officer
 import SoDashboard from './pages/Safety-Officer/SoDashboard.jsx';
-import SmpManagement from './pages/Safety-Officer/SmpManagement.jsx';
+import SmpManagement from './pages/SmpManagement.jsx';
 import NewHazards from './pages/Safety-Officer/NewHazards.jsx';
 
 //mine manager

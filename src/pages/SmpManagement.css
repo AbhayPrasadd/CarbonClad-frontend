@@ -1,6 +1,4 @@
-/* Prefix every selector with .smp-module to scope it to SmpManagement component */
 
-/* Global Container */
 .smp-module {
   font-family: Arial, sans-serif;
   background-color: #f4f7fc;
