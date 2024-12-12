@@ -1,6 +1,16 @@
 import React from "react";
 import { Bar, Line, Pie, Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from "chart.js";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+} from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement);
 
@@ -52,34 +62,34 @@ const Dashboard = () => {
   return (
     <div className="bg-gray-100 p-6 min-h-screen flex">
       {/* Left Side: Charts */}
-      <div className="w-3/4 grid grid-cols-2 gap-4">
+      <div className="w-2/3 grid grid-cols-2 gap-4">
         {/* Production Rate Bar Chart */}
         <div className="bg-white shadow-lg rounded-lg p-4">
           <h2 className="text-lg font-semibold mb-4 text-gray-700">Production Rate</h2>
-          <Bar data={productionData} options={{ responsive: true }} />
+          <Bar data={productionData} options={{ responsive: true, maintainAspectRatio: true }} />
         </div>
 
         {/* Hazard Alerts Pie Chart */}
         <div className="bg-white shadow-lg rounded-lg p-4">
           <h2 className="text-lg font-semibold mb-4 text-gray-700">Hazard Alerts</h2>
-          <Pie data={hazardData} options={{ responsive: true }} />
+          <Pie data={hazardData} options={{ responsive: true, maintainAspectRatio: true }} />
         </div>
 
         {/* Shift Performance Line Chart */}
         <div className="bg-white shadow-lg rounded-lg p-4">
           <h2 className="text-lg font-semibold mb-4 text-gray-700">Shift Performance</h2>
-          <Line data={shiftPerformanceData} options={{ responsive: true }} />
+          <Line data={shiftPerformanceData} options={{ responsive: true, maintainAspectRatio: true }} />
         </div>
 
         {/* Equipment Status Doughnut Chart */}
         <div className="bg-white shadow-lg rounded-lg p-4">
           <h2 className="text-lg font-semibold mb-4 text-gray-700">Equipment Status</h2>
-          <Doughnut data={equipmentStatusData} options={{ responsive: true }} />
+          <Doughnut data={equipmentStatusData} options={{ responsive: true, maintainAspectRatio: true }} />
         </div>
       </div>
 
       {/* Right Side: Information Section */}
-      <div className="w-1/4 flex flex-col gap-4 ml-4">
+      <div className="w-1/3 flex flex-col gap-4 ml-4">
         {/* Cubical Boxes */}
         <div className="bg-white shadow-lg rounded-lg p-4">
           <h2 className="text-md font-semibold text-gray-700">Daily Production</h2>

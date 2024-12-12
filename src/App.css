@@ -27,3 +27,31 @@
 .sidebar-collapsed .main-content {
   margin-left: 80px; /* Shifts less when sidebar is collapsed */
 }
+/* Custom styles for Dialogflow Chatbot */
+
+/* Adjust the overall size of the chatbot button and widget */
+df-messenger {
+  position: fixed !important; /* Fixed at the bottom-right */
+  bottom: 20px; /* Space from the bottom */
+  right: 20px; /* Space from the right */
+  z-index: 1000 !important; /* Ensure it stays on top */
+  --df-messenger-bot-message-font-size: 14px; /* Adjust message font size */
+  --df-messenger-user-message-font-size: 14px; /* Adjust user font size */
+  --df-messenger-input-font-size: 14px; /* Adjust input font size */
+}
+
+/* Adjust the height and width of the chat window when opened */
+df-messenger .chat-wrapper[opened="true"] {
+  width: 340px !important; /* Adjust width */
+  height: 480px !important; /* Adjust height */
+  z-index: 1001 !important; /* Ensure it stays on top */
+}
+
+/* Adjust the size of the collapsed chat button */
+df-messenger .df-messenger-launcher {
+  width: 50px !important; /* Smaller button width */
+  height: 50px !important; /* Smaller button height */
+  border-radius: 25px !important; /* Ensure it remains circular */
+  background-color: #007bff !important; /* Optional: Customize color */
+}
+

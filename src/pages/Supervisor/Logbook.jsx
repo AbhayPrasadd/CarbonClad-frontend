@@ -24,10 +24,20 @@ const Logbook = () => {
       { id: 1, name: "Roof bolts, bearing plates", status: "Yes", action: "" },
       { id: 2, name: "Nuts, Grouting capsule", status: "Yes", action: "" },
       { id: 3, name: "Timber", status: "Yes", action: "" },
+      { id: 4, name: "Brattice", status: "Yes", action: "" },
+      { id: 5, name: "Sprags", status: "Yes", action: "" },
+      { id: 3, name: "Other Safety matrial", status: "Yes", action: "" },
     ],
     ventilationDevices: [
       { id: 1, name: "Air crossing", condition: "Yes", action: "" },
       { id: 2, name: "Stopping", condition: "Yes", action: "" },
+      { id: 3, name: "Stopping", condition: "Yes", action: "" },
+      { id: 4, name: "Doors", condition: "Yes", action: "" },
+      { id: 5, name: "Brattices", condition: "Yes", action: "" },
+      { id: 6, name: "Auxilary", condition: "Yes", action: "" },
+      { id: 7, name: "Air Duct", condition: "Yes", action: "" },
+      { id: 8, name: "other vantilation", condition: "Yes", action: "" },
+      
     ],
     safetyObservations: [],
   });
